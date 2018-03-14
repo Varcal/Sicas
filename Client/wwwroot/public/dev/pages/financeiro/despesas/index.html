@@ -1,0 +1,88 @@
+﻿<div class="panel panel-default painel-inicial">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>Despesa Processos</h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div>
+            <div class="col-md-12">
+                <label for="seguradora">Seguradora</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control fonte12pt"
+                        id="seguradora"
+                        name="seguradora"
+                        ng-model="vm.seguradoraId"
+                        ng-options="seg.id as seg.nome for seg in vm.seguradoras"
+                        ng-change="vm.pesquisar()">
+                    <option value="">Todas Seguradoras</option>
+                </select>
+            </div>
+            <button class="btn btn-default" ng-click="vm.pesquisar()" ng-show="vm.habilitaBtn"><i class="fa fa-refresh"></i> <b>Atualizar</b></button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <section class="col-md-12">
+            <div ng-hide="vm.processos <=0">
+                <table id="tabela" class="table table-striped table-responsive table-hover table-condensed" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-left col-md-1">Nº Sinistro</th>
+                            <th class="text-center col-md-3">Seguradora</th>
+                            <th class="text-center col-md-2">Sindicante</th>
+                            <th class="text-center col-md-1">Dias aberto</th>
+                            <th class="text-center col-md-2">Status</th>
+                            <th class="text-right col-md-1"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="processo in vm.processos">
+                            <td class="text-left col-md-1">
+                                <a ng-href="#/despesa/detalhes/{{processo.id}}"><i data-toggle="tooltip" title="Visualizar despesas" class="fa fa-eye"></i></a>&nbsp;
+                                <a ng-href="#/despesa/editar/{{processo.id}}" ng-show="processo.possuiDespesas && processo.statusId == 8">
+                                    <i data-toggle="tooltip" title="Editar despesas" class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center col-md-1">{{processo.numeroSinistro | number}}</td>
+                            <td class="text-center col-md-3">{{processo.seguradora}}</td>
+                            <td class="text-center col-md-2">{{processo.sindicante}}</td>
+                            <td class="text-center col-md-1">{{processo.dias}}</td>
+                            <td class="text-center col-md-2">{{processo.status}}</td>
+                            <td class="text-right col-md-1">
+                                <a ng-href="#/despesa/registrar/{{processo.id}}" ng-show="!processo.possuiDespesas && processo.statusId == 8">
+                                    <i n data-toggle="tooltip" title="Lançar despesas" class="fa fa-money"></i>
+                                </a>&nbsp;
+                                <a ng-click="vm.finalizarDespesas(processo.id)" ng-show="processo.possuiDespesas && processo.statusId == 8">
+                                    <i data-toggle="tooltip" title="Finalizar despesas" class="fa fa-list"></i>
+                                </a>
+                                <a ng-href="#/processo/finalizar/{{processo.id}}"><i data-toggle="tooltip" title="Finalizar" class="fa fa-unlock" ng-show="processo.statusId == 3"></i></a>
+                                <a><i data-toggle="tooltip" title="Aguardando Emissão de NF" class="fa fa-warning text-warning" ng-show="processo.statusId == 2"></i></a>
+                                <a><i data-toggle="tooltip" title="Baixar arquivos" class="fa fa-download text-primary" ng-show="processo.statusId == 4"></i></a>&nbsp;
+                                <a><i data-toggle="tooltip" title="Finalizado" class="fa fa-lock text-success" ng-show="processo.statusId == 4"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- MODAL -->
+<script type="text/ng-template" id="ProcessoModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">ATENÇÃO</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <h4>
+            Tem certeza que deseja cancelar o processo?
+        </h4>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="vm.ok()">Confirmar</button>
+        <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    </div>
+</script>

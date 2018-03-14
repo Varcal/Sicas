@@ -236,6 +236,9 @@ FakesAssemblies/
 .ntvs_analysis.dat
 node_modules/
 
+# Bower for Visual Studio
+bower_components/
+
 # Typescript v1 declaration files
 typings/
 

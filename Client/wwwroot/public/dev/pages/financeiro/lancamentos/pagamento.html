@@ -1,0 +1,126 @@
+﻿<div class="panel panel-default painel-inicial">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>Lançamentos Sindicantes</h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="sindicante">Sindicante</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control input-sm fonte12pt"
+                            id="sindicante"
+                            name="sindicante"
+                            ng-model="vm.sindicanteId"
+                            ng-options="sindicante.id as sindicante.nome for sindicante in vm.sindicantes"
+                            ng-change="vm.habilitarBtnPesquisa()">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-default btn-sm" ng-click="vm.pesquisar()" ng-disabled="vm.desabilitaBtn || (!vm.dataInicio || !vm.dataFim) || (vm.dataInicio>vm.dataFim)"><i class="fa fa-search"></i> Pesquisar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group col-md-3">
+                <div class="col-md-12">
+                    <label class="control-label" for="dataInicio">Data Inicio</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control" type="date" id="dataInicio" name="dataInicio" ng-model="vm.dataInicio" />
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="col-md-12">
+                    <label class="control-label" for="dataFim">Data Fim</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control" type="date" id="dataFim" name="dataFim" ng-model="vm.dataFim" />
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="control-label"></label>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-sm btn-block" ng-click="vm.fecharPagamento()" ng-show="vm.recibos.length > 0 && vm.habilitaFechamentoBtn">Gerar Pagamento</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="panel-body">
+        <section class="col-md-12">
+            <div ng-hide="vm.recibos <= 0">
+                <table id="tabela" class="table table-striped table-responsive table-hover table-condensed" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                    <thead>
+                    <tr>
+                        <th class="text-left col-md-1"></th>
+                        <th class="text-center col-md-1">Nº Sinistro</th>
+                        <th class="text-center col-md-3">Seguradora</th>
+                        <th class="text-center col-md-2">Status</th>
+                        <th class="text-center col-md-1">Total</th>
+                        <th class="text-center col-md-1">Conclusão</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="recibo in vm.recibos">
+                        <td class="text-left col-md-1">
+                            <a ng-click="vm.openModal(recibo.lancamentos)"><i class="fa fa-eye" data-toggle="tooltip" title="Visualizar Lançamentos"></i></a>
+                        </td>
+                        <td class="text-center col-md-1">{{recibo.numeroSinistro | number}}</td>
+                        <td class="text-center col-md-3">{{recibo.seguradora}}</td>
+                        <td class="text-center col-md-2">{{recibo.status}}</td>
+                        <td class="text-center col-md-1">{{recibo.total | number: 2}}</td>
+                        <td class="text-center col-md-1">{{recibo.conclusao | date: 'dd/MM/yyyy'}}</td>                        
+                     </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- MODAL -->
+<!-- MODAL -->
+<script type="text/ng-template" id="reciboModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Lançamentos</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <table class="table table-hover table-responsive table-striped" ng-show="vm.lancamentos.length > 0">
+            <thead>
+                <tr>
+                    <th class="text-center col-md-2">Tipo Lançamento</th>
+                    <th class="text-center">Descricao</th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lancamento in vm.lancamentos">
+                    <td class="text-center col-md-4">
+                        {{lancamento.lancamentoTipo}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.descricao}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.valor| number: 2}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.tipoFinanceiro}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning" ng-hide="vm.lancamentos.length > 0">
+            <h4>Nenhum lançamento para este recibo</h4>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="button" ng-click="vm.cancel()">Fechar</button>
+    </div>
+</script>

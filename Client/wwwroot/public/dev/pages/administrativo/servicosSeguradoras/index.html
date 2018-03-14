@@ -1,0 +1,49 @@
+﻿<div class="panel panel-default painel-inicial" ng-cloak>
+    <div class="panel-heading">
+        <h4>Serviços de Seguradoras</h4>
+    </div>
+    <div class="panel-body">
+        <section class="col-md-12">
+            <div>
+                <a class="btn btn-primary" href="#/servicoSeguradora/registrar">Novo</a>
+            </div>
+            <br />
+            <div ng-hide="vm.servicosSeguradoras.length <= 0">
+                <table id="tabela" class="table table-striped table-responsive table-hover" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1"></th>
+                            <th><strong>Nome do Serviço</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="servicoSeguradora in vm.servicosSeguradoras">
+                            <td class="text-center col-md-1">
+                                <a href="#/servicoSeguradora/editar/{{servicoSeguradora.id}}"><i class="fa fa-pencil"></i></a>&nbsp;
+                                <!--<a href="#/servicoSeguradora/detalhes/{{servicoSeguradora.id}}"><i class="fa fa-eye"></i></a>-->
+                                <a ng-click="vm.openModal(servicoSeguradora.id)"><i class="fa fa-remove text-danger"></i></a>
+                            </td>
+                            <td>{{servicoSeguradora.nome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- MODAL -->
+<script type="text/ng-template" id="ServicoSeguradoraModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">ATENÇÃO</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <h4>
+            Tem certeza que deseja excluir o serviço?
+        </h4>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="vm.ok()">Confirmar</button>
+        <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    </div>
+</script>

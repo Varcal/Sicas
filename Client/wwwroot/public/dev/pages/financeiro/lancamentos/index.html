@@ -1,0 +1,260 @@
+﻿<div class="panel panel-default painel-inicial">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>Lançamentos Sindicante</h4>
+        </div>
+    </div>
+    <!-- Filtros -->
+    <div class="panel-body">
+        <div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="seguradora">Seguradora</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control input-sm fonte12pt"
+                            id="seguradora"
+                            name="seguradora"
+                            ng-model="vm.seguradoraId"
+                            ng-options="seguradora.id as seguradora.nome for seguradora in vm.seguradoras"
+                            ng-change="vm.carregarProcessos()"
+                            ng-disabled="vm.formHabilitado">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <button class="btn btn-default btn-sm" ng-click="vm.pesquisar()" ng-show="false"><i class="fa fa-refresh"></i> Atualizar</button>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="processo">Processo</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control input-sm fonte12pt"
+                            id="processo"
+                            name="sindicante"
+                            ng-model="vm.processo"
+                            ng-options="processo as processo.numeroSinistro for processo in vm.processos"
+                            ng-disabled="vm.desabitaProcesso || vm.formHabilitado"
+                            ng-change="vm.carregarSindicantes()">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="sindicante">Sindicante</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control input-sm fonte12pt"
+                            id="sindicante"
+                            name="sindicante"
+                            ng-model="vm.sindicanteId"
+                            ng-options="sindicante.id as sindicante.nome for sindicante in vm.sindicantes"
+                            ng-disabled="vm.desabilitaSindicante || vm.formHabilitado"
+                            ng-change="vm.pesquisar()">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="control-label"></label>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-sm btn-block" ng-click="vm.habilitarForm()" ng-show="vm.recibo.status == 1" ng-disabled="!(vm.seguradoraId && vm.processo && vm.sindicanteId)">Novo Lançamento</button>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="vm.recibo.lancamentos.length <= 0 || vm.formHabilitado">
+            <div class="form-group col-md-2">
+                <div class="col-md-12">
+                    <label for="lancamentoTipo">Total</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control input-sm fonte12pt text-right" type="text" readonly ng-model="vm.total" />
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-12">
+                    <label for="lancamentoTipo">Descontos</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control input-sm fonte12pt text-right" type="text" readonly ng-model="vm.descontos" />
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-12">
+                    <label for="lancamentoTipo">Total à receber</label>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control input-sm fonte12pt text-right" type="text" readonly ng-model="vm.totalReceber" />
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <br />
+                <div class="col-md-4">
+                    <button class="btn btn-success btn-sm btn-block" ng-click="vm.fecharLancamento()" ng-show="vm.recibo.status == 1 && (vm.processo && (vm.processo.statusId == 3 || vm.processo.statusId == 4))" ng-disabled="!(vm.seguradoraId && vm.processo && vm.sindicanteId)">Fechar Recibo</button>
+                    <button class="btn btn-warning btn-sm btn-block" ng-click="vm.reabrirLancamento()" ng-show="vm.recibo.status == 2">Reabrir Lançamentos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Filtros -->
+    <!-- Formulario -->
+    <div class="panel-body" ng-show="vm.formHabilitado">
+        <h4 class="text-primary">Cadastro de Lançamentos</h4>
+        <form id="lancamentoForm" name="lancamentoForm" method="post" novalidate>
+            <input type="hidden" ng-model="vm.lancamento.processoId " value="{{vm.processoId}}" />
+            <input type="hidden" ng-model="vm.lancamento.sindicanteId" value="{{vm.sindicanteId}}" />
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="lancamentoTipo">Tipo Lançamento *</label>
+                </div>
+                <div class="col-md-4" ng-class="{'has-error' : lancamentoForm.lancamentoTipo.$invalid && lancamentoForm.lancamentoTipo.$dirty}">
+                    <select class="form-control input-sm fonte12pt"
+                            id="lancamentoTipo"
+                            name="lancamentoTipo"
+                            ng-model="vm.lancamento.lancamentoTipo"
+                            ng-change="vm.selcionarTipo()"
+                            ng-options="lancamentoTipo.id as lancamentoTipo.nome for lancamentoTipo in vm.lancamentoTipoList"
+                            required>
+                        <option value="">Selecione</option>
+                    </select>
+                    <div class="col-md-12" ng-show="lancamentoForm.lancamentoTipo.$invalid && lancamentoForm.lancamentoTipo.$dirty">
+                        <p class="text-danger">
+                            * Campo obrigatório
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="descricao">Descrição *</label>
+                </div>
+                <div class="col-md-4" ng-class="{'has-error' : lancamentoForm.descricao.$invalid && lancamentoForm.descricao.$dirty}">
+                    <input class="form-control input-sm fonte12pt"
+                           id="descricao"
+                           name="descricao"
+                           ng-model="vm.lancamento.descricao"
+                           required />
+                    <div class="col-md-12" ng-show="lancamentoForm.descricao.$invalid && lancamentoForm.descricao.$dirty">
+                        <p class="text-danger">
+                            * Campo obrigatório
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="valor">Valor *</label>
+                </div>
+                <div class="col-md-2" ng-class="{'has-error' : lancamentoForm.valor.$invalid && lancamentoForm.valor.$dirty}">
+                    <input class="form-control input-sm fonte12pt text-right"
+                           id="valor"
+                           name="valor"
+                           ng-model="vm.lancamento.valor"
+                           ui-money-mask maxlength="9"
+                           required />
+                    <div class="col-md-12" ng-show="lancamentoForm.valor.$invalid && lancamentoForm.valor.$dirty">
+                        <p class="text-danger">
+                            * Campo obrigatório
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="tipo">Tipo *</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control input-sm fonte12pt" ng-class="{'has-error' : lancamentoForm.tipo.$invalid && lancamentoForm.tipo.$dirty}"
+                            id="tipo"
+                            name="tipo"
+                            ng-model="vm.lancamento.tipoFinanceiro"
+                            ng-disabled="vm.lancamento.lancamentoTipo === 3"
+                            ng-options="tipo.id as tipo.nome for tipo in vm.tipoFinanceriotList"
+                            required>
+                        <option value="">Selecione</option>
+                    </select>
+                    <div class="col-md-12" ng-show="lancamentoForm.tipo.$invalid && lancamentoForm.tipo.$dirty">
+                        <p class="text-danger">
+                            * Campo obrigatório
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12">
+                    <label for="observacao">Observação</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea class="form-control"
+                              id="observacao"
+                              name="observacao"
+                              cols="100"
+                              rows="5"
+                              width="100%"
+                              ng-model="vm.lancamento.observacao"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <br />
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="button" ng-click="vm.salvar(lancamentoForm)" ng-disabled="lancamentoForm.$invalid || !lancamentoForm.$dirty">Salvar</button>
+                    <button class="btn btn-primary" ng-click="vm.desabilitarForm()" type="button">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Formulario -->
+    <!-- Tabela -->
+    <div class="panel-body">
+        <section class="col-md-12">
+            <div ng-hide="vm.recibo.lancamentos.length <= 0 || vm.formHabilitado">
+                <table id="tabela" class="table table-striped table-responsive table-hover table-condensed" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1"></th>
+                            <th class="text-center col-md-2">Tipo Lançamento</th>
+                            <th class="text-center col-md-3">Descrição</th>
+                            <th class="text-center col-md-1">Valor</th>
+                            <th class="text-center col-md-1">Tipo</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="lancamento in vm.recibo.lancamentos">
+                            <td class="text-center col-md-1">
+                                <a ng-click="vm.openModal(lancamento.id)" ng-show="vm.recibo.status == 1">
+                                    <i data-toggle="tooltip" title="Excluir" class="fa fa-remove"></i>
+                                </a>
+                                <a  ng-show="vm.recibo.status == 2">
+                                    <i data-toggle="tooltip" title="Recibo fechado" class="fa fa-lock"></i>
+                                </a>
+                            </td>
+                            <td class="text-center col-md-2">{{lancamento.lancamentoTipo}}</td>
+                            <td class="text-center col-md-3">{{lancamento.descricao}}</td>
+                            <td class="text-center col-md-1">{{lancamento.valor | number:2}}</td>
+                            <td class="text-center col-md-1">{{lancamento.tipoFinanceiro}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <!-- Tabela -->
+</div>
+
+<!-- MODAL -->
+<script type="text/ng-template" id="LancamentoModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">ATENÇÃO</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <h4>
+            Tem certeza que deseja excluir o lançamento?
+        </h4>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="vm.ok()">Confirmar</button>
+        <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    </div>
+</script>

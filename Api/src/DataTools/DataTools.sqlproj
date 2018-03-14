@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DataTools</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{e6413fb8-50a0-4e5a-9d44-447382578566}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DataTools</RootNamespace>
+    <AssemblyName>DataTools</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\DadosPessoaFisica_1.sql" />
+    <Build Include="dbo\Tables\DadosPessoaJuridica_1.sql" />
+    <Build Include="dbo\Tables\Evento_1.sql" />
+    <Build Include="dbo\Tables\Honorario_1.sql" />
+    <Build Include="dbo\Tables\ProcessoSindicante_1.sql" />
+    <Build Include="dbo\Tables\ServicoSeguradoraEventoTipo_1.sql" />
+    <Build Include="dbo\Tables\SindicanteInterno_1.sql" />
+    <Build Include="dbo\Tables\UsuarioPerfil_1.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory_1.sql" />
+    <Build Include="dbo\Tables\Banco_1.sql" />
+    <Build Include="dbo\Tables\Cidade_1.sql" />
+    <Build Include="dbo\Tables\DadosBancarios_1.sql" />
+    <Build Include="dbo\Tables\DadosCadastrais_1.sql" />
+    <Build Include="dbo\Tables\Endereco_1.sql" />
+    <Build Include="dbo\Tables\EnderecoSindicante_1.sql" />
+    <Build Include="dbo\Tables\EnderecoTipo_1.sql" />
+    <Build Include="dbo\Tables\Estado_1.sql" />
+    <Build Include="dbo\Tables\EventoTipo_1.sql" />
+    <Build Include="dbo\Tables\Pais_1.sql" />
+    <Build Include="dbo\Tables\Perfil_1.sql" />
+    <Build Include="dbo\Tables\Processo_1.sql" />
+    <Build Include="dbo\Tables\ProcessoHistorico_1.sql" />
+    <Build Include="dbo\Tables\Seguradora_1.sql" />
+    <Build Include="dbo\Tables\ServicoSeguradora_1.sql" />
+    <Build Include="dbo\Tables\ServicoSindicante_1.sql" />
+    <Build Include="dbo\Tables\Sindicante_1.sql" />
+    <Build Include="dbo\Tables\SindicanteTipo_1.sql" />
+    <Build Include="dbo\Tables\Status_1.sql" />
+    <Build Include="dbo\Tables\Usuario_1.sql" />
+    <Build Include="dbo\Tables\AuditLog_1.sql" />
+    <Build Include="dbo\Tables\AuditLogDetail_1.sql" />
+    <Build Include="dbo\Tables\Despesa_1.sql" />
+    <Build Include="dbo\Tables\DespesaAdicional_1.sql" />
+    <Build Include="dbo\Tables\EnderecoDespesa_1.sql" />
+    <Build Include="dbo\Tables\LogMetadata_1.sql" />
+    <Build Include="dbo\Tables\ReciboSindicanteItem_1.sql" />
+    <Build Include="dbo\Tables\ReciboSindicante_1.sql" />
+    <Build Include="dbo\Tables\Recibo_1.sql" />
+    <Build Include="dbo\Tables\LancamentoDespesa_1.sql" />
+    <Build Include="dbo\Tables\Lancamento_1.sql" />
+    <Build Include="dbo\Tables\DespesaSeguradoraItem_1.sql" />
+    <Build Include="dbo\Tables\DespesaSeguradora_1.sql" />
+    <Build Include="dbo\Tables\Segurado.sql" />
+    <Build Include="dbo\Tables\LocalFatos.sql" />
+    <Build Include="dbo\Tables\EnderecoSegurado.sql" />
+    <Build Include="dbo\Tables\Acionamento.sql" />
+  </ItemGroup>
+</Project>

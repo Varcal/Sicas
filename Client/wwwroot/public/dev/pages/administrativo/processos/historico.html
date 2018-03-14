@@ -1,0 +1,90 @@
+﻿<div class="panel panel-default painel-inicial">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>Histórico de Processos</h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="container form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <label for="seguradora">Seguradora</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control fonte12pt"
+                                id="seguradora"
+                                name="seguradora"
+                                ng-model="vm.seguradoraId"
+                                ng-options="seg.id as seg.nome for seg in vm.seguradoras"
+                                ng-change="vm.habilitarPesquisa()">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <label for="numeroSinistro">Nº do Sinistro</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control text-right fonte12pt"
+                               id="numeroSinistro"
+                               name="numeroSinistro"
+                               type="text"
+                               ng-model="vm.numeroSinistro"
+                               ng-keyup="vm.habilitarPesquisa()"
+                               ui-number-mask="0" maxlength="30" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <button class="btn btn-default" ng-click="vm.pesquisar()" ng-show="vm.habilitaBtn" ng-disabled="vm.numeroSinistro == ''"><i class="fa fa-search"></i> Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+              
+    </div>
+    <div class="panel-body">
+        <section class="col-md-12">
+           
+            <br />
+            <div ng-hide="vm.historicoList <=0">
+                <table id="tabela" class="table table-striped table-responsive table-hover table-condensed" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                    <thead>
+                        <tr>
+                            <!--<th class="text-center col-md-1"></th>-->
+                            <th class="text-center col-md-2">Nº Sinistro</th>
+                            <th class="text-center col-md-2">Seguradora</th>
+                            <th class="text-center col-md-2">Sindicante</th>
+                            <th class="text-center col-md-2">Iniciado Em</th>
+                            <th class="text-center col-md-2">Finalizado em</th>
+                            <!--<th class="text-center col-md-1">Dias em aberto</th>-->
+                            <th class="text-center col-md-2">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="historico in vm.historicoList">
+                            <!--<td class="col-md-1 text-center">
+                                <a href="#/processo/editar/{{historico.id}}"><i class="fa fa-pencil"></i></a>&nbsp;
+                                <a href="#/seguradora/detalhes/{{historico.id}}"><i class="fa fa-eye"></i></a>&nbsp;
+                                <a href="#/seguradora/excluir/{{historico.id}}"><i class="fa fa-remove text-danger"></i></a>
+                            </td>-->
+                            <td class="text-center">{{historico.numeroSinistro | number}}</td>
+                            <td class="text-center">{{historico.seguradora}}</td>                          
+                            <td class="text-center">{{historico.sindicante}}</td>
+                            <td class="text-center">{{historico.iniciadoEm | date: dd/MM/yyyy}}</td>
+                            <td class="text-center">{{historico.finalizadoEm | date: dd/MM/yyyy}}</td>
+                            <!--<td class="text-center col-md-2">{{historico.diasEmAberto}}</td>-->
+                            <td class="text-center col-md-2">{{historico.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>

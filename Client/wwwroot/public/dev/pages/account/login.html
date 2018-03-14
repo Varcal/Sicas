@@ -1,0 +1,55 @@
+﻿
+<div class="col-md-12 text-center text-primary painel-login">
+    <h1>FC Feitosa Consultoria</h1>
+    <h4>SICAS - Sistema de Controle e Auditoria de Sinistros</h4>
+</div>
+
+<div class="col-md-12">
+    <div class="col-lg-offset-4 col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">Faça seu login</div>
+           <div class="panel-body">
+                <form name="loginForm" ng-submit="vm.submit()" novalidate>
+                    <div class="form-group" ng-class="{'has-error': loginForm.login.$invalid && loginForm.login.$dirty}">
+                        <label>Usuário  *</label>
+                        <input
+                            ng-model="vm.usuario.login"
+                            ng-minlength="5"
+                            ng-maxlength="160"
+                            ng-disabled="vm.loading"
+                            type="text"
+                            class="form-control"
+                            id="login"
+                            name="login"
+                            placeholder="Informe seu Login"
+                            required/>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
+                        <label>Senha  *</label>
+                        <input ng-model="vm.usuario.password"
+                               ng-minlength="6"
+                               ng-maxlength="20"
+                               ng-disabled="vm.loading"
+                               type="password"
+                               class="form-control"
+                               id="password"
+                               name="password"
+                               placeholder="Informe sua senha"
+                               required/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="vm.loading || loginForm.$invalid || !loginForm.$dirty">
+                        Entrar
+                    </button>
+                </form>
+                <div class="col-md-12 text-center" ng-show="vm.loading">
+                    <loading ng-model="vm.loading"></loading>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer-login"  class="text-center col-md-12 navbar-fixed-bottom">
+    <h5>Desenvolvido por: <a href="http://varcalsys.com.br" target="blank">&copy; {{vm.ano}} VarçalSys Soluções em Sistemas</a></h5>
+</div>

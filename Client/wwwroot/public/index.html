@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="assets/css/styles-1.0.0.min.css" rel="stylesheet"/>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <title>SICAS - Feitosa</title>
+    <link rel="shortcut icon" href="assets/images/FC.ico" type="image/x-icon" />
+    
+</head>
+<body ng-cloak>
+    <div ng-include="'pages/shared/headbar.html'"></div>
+    <div id="wrap">
+        <div id="main" class="container" ng-view></div>
+    </div>
+    <div ng-include="'pages/shared/footer.html'" ng-show="user"></div>
+   
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf8TUJQIEN-jJ_MNgqco8qtWhqHXVW6PY&signed_in=true"></script>
+
+    <script src="assets/js/all-1.0.0.min.js"></script>
+</body>
+</html>

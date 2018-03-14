@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3CC610C-BF98-41F5-A118-6A8B934B96C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infra.Data</RootNamespace>
+    <AssemblyName>Infra.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI">
+      <HintPath>..\..\packages\EntityFramework.MappingAPI.6.1.0.9\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="TrackerEnabledDbContext, Version=3.6.1.0, Culture=neutral, PublicKeyToken=4f92af0b908c4a0a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TrackerEnabledDbContext.3.6.1\lib\net45\TrackerEnabledDbContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TrackerEnabledDbContext.Common, Version=3.6.1.0, Culture=neutral, PublicKeyToken=4f92af0b908c4a0a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TrackerEnabledDbContext.Common.3.6.1\lib\net45\TrackerEnabledDbContext.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administrativo\Mappings\AcionamentoMap.cs" />
+    <Compile Include="Administrativo\Mappings\BancoMap.cs" />
+    <Compile Include="Administrativo\Mappings\DadosBancariosMap.cs" />
+    <Compile Include="Administrativo\Mappings\EnderecoSeguradoMap.cs" />
+    <Compile Include="Administrativo\Mappings\LocalFatosMap.cs" />
+    <Compile Include="Administrativo\Mappings\ProcessoHistoricoMap.cs" />
+    <Compile Include="Administrativo\Mappings\SeguradoMap.cs" />
+    <Compile Include="Administrativo\Repositories\BancoRepository.cs" />
+    <Compile Include="Administrativo\Repositories\EventoRepository.cs" />
+    <Compile Include="Administrativo\Repositories\ProcessoHistoricoRepository.cs" />
+    <Compile Include="Administrativo\Repositories\ProcessoRepository.cs" />
+    <Compile Include="Core\Mappings\DadosCadastros\DadosCadastraisMap.cs" />
+    <Compile Include="Core\Mappings\DadosCadastros\DadosPessoaFisicaMap.cs" />
+    <Compile Include="Core\Mappings\DadosCadastros\DadosPessoaJuridicaMap.cs" />
+    <Compile Include="Core\Mappings\Logs\AuditLogDetailMap.cs" />
+    <Compile Include="Core\Mappings\Logs\AuditLogMap.cs" />
+    <Compile Include="Core\Mappings\Logs\LogMetaDataMap.cs" />
+    <Compile Include="Core\Repositories\EnderecoRepository.cs" />
+    <Compile Include="Administrativo\Repositories\ServicoSindicanteRepository.cs" />
+    <Compile Include="Contexts\AdoContext.cs" />
+    <Compile Include="Contexts\EfContext.cs" />
+    <Compile Include="Core\Extensions\TypeConfigurationExtensions.cs" />
+    <Compile Include="Core\Mappings\Base\BaseMap.cs" />
+    <Compile Include="Core\Mappings\Enderecos\CidadeMap.cs" />
+    <Compile Include="Core\Mappings\Enderecos\EnderecoMap.cs" />
+    <Compile Include="Administrativo\Mappings\EnderecoSindicanteMap.cs" />
+    <Compile Include="Core\Mappings\Enderecos\EnderecoTipoMap.cs" />
+    <Compile Include="Core\Mappings\Enderecos\EstadoMap.cs" />
+    <Compile Include="Administrativo\Mappings\EventoMap.cs" />
+    <Compile Include="Administrativo\Mappings\EventoTipoMap.cs" />
+    <Compile Include="Administrativo\Mappings\HonorarioMap.cs" />
+    <Compile Include="Core\Mappings\Enderecos\PaisMap.cs" />
+    <Compile Include="Account\Mappings\PerfilMap.cs" />
+    <Compile Include="Administrativo\Mappings\ProcessoMap.cs" />
+    <Compile Include="Administrativo\Mappings\SeguradoraMap.cs" />
+    <Compile Include="Administrativo\Mappings\ServicoSeguradoraMap.cs" />
+    <Compile Include="Administrativo\Mappings\ServicoSindicanteMap.cs" />
+    <Compile Include="Administrativo\Mappings\SindicanteInternoMap.cs" />
+    <Compile Include="Administrativo\Mappings\SindicanteMap.cs" />
+    <Compile Include="Administrativo\Mappings\SindicanteTipoMap.cs" />
+    <Compile Include="Administrativo\Mappings\StatusMap.cs" />
+    <Compile Include="Account\Mappings\UsuarioMap.cs" />
+    <Compile Include="Financeiro\Mappings\DespesaAdicionalMap.cs" />
+    <Compile Include="Financeiro\Mappings\DespesaMap.cs" />
+    <Compile Include="Financeiro\Mappings\DespesaSeguradoraItemMap.cs" />
+    <Compile Include="Financeiro\Mappings\DespesaSeguradoraMap.cs" />
+    <Compile Include="Financeiro\Mappings\EnderecoDespesaMap.cs" />
+    <Compile Include="Financeiro\Mappings\LancamentoDespesaMap.cs" />
+    <Compile Include="Financeiro\Mappings\LancamentoMap.cs" />
+    <Compile Include="Financeiro\Mappings\ReciboMap.cs" />
+    <Compile Include="Financeiro\Mappings\ReciboSindicanteItemMap.cs" />
+    <Compile Include="Financeiro\Mappings\ReciboSindicanteMap.cs" />
+    <Compile Include="Financeiro\Repositories\DespesaSeguradoraRepository.cs" />
+    <Compile Include="Financeiro\Repositories\DespesaRepository.cs" />
+    <Compile Include="Financeiro\Repositories\LancamentoRepository.cs" />
+    <Compile Include="Financeiro\Repositories\ReciboRepository.cs" />
+    <Compile Include="Financeiro\Repositories\ReciboSindicanteRepository.cs" />
+    <Compile Include="Migrations\201708310148326_01-CreateDb.cs" />
+    <Compile Include="Migrations\201708310148326_01-CreateDb.Designer.cs">
+      <DependentUpon>201708310148326_01-CreateDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\Repositories\Base\RepositoryBase.cs" />
+    <Compile Include="Core\Repositories\CidadeRepository.cs" />
+    <Compile Include="Core\Repositories\EstadoRepository.cs" />
+    <Compile Include="Administrativo\Repositories\EventoTipoRepository.cs" />
+    <Compile Include="Account\Repositories\PerfilRepository.cs" />
+    <Compile Include="Administrativo\Repositories\SeguradoraRepository.cs" />
+    <Compile Include="Administrativo\Repositories\ServicoSeguradoraRepository.cs" />
+    <Compile Include="Administrativo\Repositories\SindicanteRepository.cs" />
+    <Compile Include="Account\Repositories\UsuarioRepository.cs" />
+    <Compile Include="Core\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Core\UnitOfWork\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{a36d49e5-1b15-40ac-afe6-687871fb4ddf}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj">
+      <Project>{0b380afa-f2c4-4701-9002-2d803db3cefc}</Project>
+      <Name>SharedKernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708310148326_01-CreateDb.resx">
+      <DependentUpon>201708310148326_01-CreateDb.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

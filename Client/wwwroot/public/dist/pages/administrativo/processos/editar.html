@@ -1,0 +1,270 @@
+<section class="col-md-12" ng-cloak><form id="processoForm" name="processoForm" class="form-horizontal" novalidate><div class="panel panel-default painel-inicial"><div class="panel-heading"><h4 class="panel-title">Processo</h4></div><div class="panel-body"><div class="container col-md-12"><div class="col-md-12"><div class="form-group"><div class="col-md-3"><label class="control-label" for="id">Número</label><input class="form-control input-sm fonte12pt text-right" type="text" id="id" name="id" readonly="readonly" ng-model="vm.processo.id"></div><div class="col-md-3 col-md-offset-2"><label class="control-label" for="dataCadastro">Data Cadastro</label><input class="form-control input-sm fonte12pt text-right" id="dataCadastro" name="dataCadastro" ng-model="vm.processo.dataCadastro" mask="39/19/9999" readonly="readonly"></div></div><div class="form-group"><div class="col-md-4" ng-class="{'has-error' : processoForm.seguradora.$invalid && processoForm.seguradora.$dirty}"><label class="control-label">Seguradora *</label><select class="form-control input-sm fonte12pt" id="seguradora" name="seguradora" ng-model="vm.processo.seguradora" ng-options="s as s.nome for s in vm.seguradoras" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.seguradora.$invalid && processoForm.seguradora.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div><div class="col-md-4 col-md-offset-1"><label class="control-label" for="cnpj">CNPJ</label><input class="form-control input-sm fonte12pt text-right" type="text" id="cnpj" name="cnpj" ui-br-cnpj-mask ng-model="vm.processo.seguradora.cnpj" readonly="readonly"></div></div><div class="form-group"><div class="col-md-4" ng-class="{'has-error' : processoForm.servicoSeguradora.$invalid && processoForm.servicoSeguradora.$dirty}"><label for="servicoSeguradora" class="control-label">Serviço Seguradora *</label><select class="form-control input-sm fonte12pt" id="servicoSeguradora" name="servicoSeguradora" ng-model="vm.processo.servicoSeguradora" ng-options="servicoSeguradora as servicoSeguradora.nome for servicoSeguradora in vm.servicoSeguradoraList" ng-change="vm.carregarEventoTipo()" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.servicoSeguradora.$invalid && processoForm.servicoSeguradora.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div><div class="col-md-4 col-md-offset-1" ng-class="{'has-error' : processoForm.evento.$invalid && processoForm.evento.$dirty}"><label class="control-label" for="evento">Tipo Evento *</label><select class="form-control input-sm fonte12pt" id="evento" name="evento" ng-model="vm.processo.eventoTipo" ng-options="eventoTipo as eventoTipo.nome for eventoTipo in vm.eventoTipoList" ng-disabled="vm.desabilitaDropEvento || profile.isAnalista() || vm.processo.statusId != 1" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.evento.$invalid && processoForm.evento.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><div class="form-group"><div class="col-md-4" ng-class="{'has-error' : processoForm.sindicante.$invalid && processoForm.sindicante.$dirty}"><label class="control-label" for="sindicante">Sindicante *</label><select class="form-control input-sm fonte12pt" id="sindicante" name="sindicante" ng-model="vm.processo.sindicante" ng-options="sindicante as sindicante.nome for sindicante in vm.sindicanteList" ng-change="vm.carregarServicoSindicante()" ng-disabled="profile.isAnalista()|| vm.processo.statusId != 1" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.sindicante.$invalid && processoForm.sindicante.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div><div class="col-md-4 col-md-offset-1" ng-class="{'has-error' : processoForm.servicoSindicante.$invalid && processoForm.servicoSindicante.$dirty}"><label class="control-label" for="servicoSindicante">Serviço Sindicante *</label><select class="form-control input-sm fonte12pt" id="servicoSindicante" name="servicoSindicante" ng-model="vm.processo.servicoSindicante" ng-disabled="vm.desabilitaDropServicoSindicante || profile.isAnalista() || vm.processo.statusId != 1" ng-options="servicoSindicante as servicoSindicante.nome for servicoSindicante in vm.servicoSindicanteList" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.servicoSindicante.$invalid && processoForm.servicoSindicante.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><div class="form-group"><div class="col-md-4" ng-class="{'has-error' : processoForm.numeroSinistro.$invalid && processoForm.numeroSinistro.$dirty}"><label class="control-label" for="numeroSinistro">Nº Sinistro *</label><input class="form-control input-sm fonte12pt text-right" type="text" id="numeroSinistro" name="numeroSinistro" ng-model="vm.processo.numeroSinistro" ui-number-mask="0" maxlength="30" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required><div class="col-md-12" ng-show="processoForm.numeroSinistro.$invalid && processoForm.numeroSinistro.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div><div class="col-md-4 col-md-offset-1" ng-class="{'has-error' : processoForm.numeroReferencia.$invalid && processoForm.numeroReferencia.$dirty}"><label class="control-label" for="referencia">Nº Referência</label><input class="form-control input-sm fonte12pt text-right" type="text" id="numeroReferencia" name="numeroReferencia" ng-model="vm.processo.numeroReferencia" ui-number-mask="0" maxlength="30" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1"><div class="col-md-12" ng-show="processoForm.numeroReferencia.$invalid && processoForm.numeroReferencia.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><div class="form-group" ng-show=""><div class="col-md-4"><label class="control-label" for="numeroSinistro">Placa</label><input class="form-control input-sm fonte12pt text-right" type="text" id="placa" name="placa" ng-model="vm.processo.placa" ng-pattern="vm.placaPattern" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" maxlength="8"><div class="col-md-12" ng-show="processoForm.placa.$error.pattern && processoForm.placa.$dirty"><p class="text-danger">* Placa inválida</p></div></div></div><div class="form-group"><div class="col-md-2" ng-class="{'has-error' : processoForm.ufProcesso.$invalid && processoForm.ufProcesso.$dirty}"><label class="control-label" for="ufProcesso">UF *</label><select class="form-control input-sm text-center fonte12pt" id="ufProcesso" name="ufProcesso" ng-model="vm.processo.estado" ng-options="estado as estado.uf for estado in vm.estadosProcesso" ng-change="vm.carregarDropCidadeProcesso()" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.ufProcesso.$invalid && processoForm.ufProcesso.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div><div class="col-md-4" ng-class="{'has-error' : processoForm.cidadeProcesso.$invalid && processoForm.cidadeProcesso.$dirty}"><label class="control-label" for="cidadeFatos">Cidade *</label><select class="form-control input-sm text-center fonte12pt" id="cidadeProcesso" name="cidadeProcesso" ng-model="vm.processo.cidade" ng-options="cidade as cidade.nome for cidade in vm.cidadesProcesso" ng-disabled="vm.desabilitaCidadeProcesso || (profile.isAnalista() || vm.processo.statusId != 1)" required><option value="">Selecione...</option></select><div class="col-md-12" ng-show="processoForm.cidadeProcesso.$invalid && processoForm.cidadeProcesso.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><div class="form-group"><div class="col-md-6" ng-class="{'has-error' : processoForm.analista.$invalid && processoForm.analista.$dirty}"><label class="control-label" for="analista">Analista *</label><input class="form-control input-sm fonte12pt" type="text" id="analista" name="analista" ng-model="vm.processo.analista" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required=""><div class="col-md-12" ng-show="processoForm.analista.$invalid && processoForm.analista.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><!-- Local dos Fatos --><!--<div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label"></label>
+                                <h4 class="text-primary">Local dos Fatos</h4>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : processoForm.cepFatos.$invalid && processoForm.cepFatos.$dirty}">
+                            <div class="col-md-2">
+                                <label class="control-label" for="cepFatos">CEP *</label>
+                                <input class="form-control input-sm text-right fonte12pt"
+                                       type="text"
+                                       id="cepFatos"
+                                       name="cepFatos"
+                                       ng-model="vm.processo.localFatos.cep"
+                                       nminlength="9"
+                                       maxlength="9"
+                                       ui-br-cep-mask
+                                       ng-disabled="!vm.desabilitadaFatos || (profile.isAnalista() || vm.processo.statusId != 1)"
+                                       required />
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary btn-sm btn-cep"
+                                        ng-click="vm.pesquisarEnderecoPorCepFatos()"
+                                        ng-disabled="(processoForm.cepFatos.$invalid || !processoForm.cepFatos.$dirty) || (profile.isAnalista() || vm.processo.statusId != 1)"
+                                        ng-show="vm.desabilitaNovaPesquisaFatos">
+                                    <i class="fa fa-search"></i><b> Pesquisar CEP</b>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm btn-cep" ng-click="vm.novaPesquisaFatos()"
+                                        ng-hide="vm.desabilitaNovaPesquisaFatos || (profile.isAnalista() || vm.processo.statusId != 1)">
+                                    <b>Nova Pesquisa</b>
+                                </button>
+                            </div>
+                            <div class="col-md-12" ng-show="processoForm.cepFatos.$invalid && processoForm.cepFatos.$dirty">
+                                <p class="text-danger" ng-show="!processoForm.cepFatos.$error.required">
+                                    * CEP inválido
+                                </p>
+                                <p class="text-danger" ng-show="processoForm.cepFatos.$error.required">
+                                    * Campo obrigatório
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="profile.isAnalista() || vm.processo.statusId != 1">
+                            <div class="col-md-12">
+                                <label class="control-label">Desabilita Preechimento Manual  </label>
+                                <input class="checkbox-inline" type="checkbox" ng-model="vm.desabilitadaFatos" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.localFatos.$invalid && processoForm.localFatos.$dirty}">
+                                <label class="control-label" for="localFatos">Endereco *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="localFatos"
+                                       name="localFatos"
+                                       ng-model="vm.processo.localFatos.logradouro"
+                                       ng-disabled="vm.desabilitadaFatos || (profile.isAnalista() || vm.processo.statusId != 1)"
+                                       required />
+                                <div class="col-md-12" ng-show="processoForm.localFatos.$invalid && processoForm.localFatos.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.numeroFatos.$invalid && processoForm.numeroFatos.$dirty}">
+                                <label class="control-label" for="numeroFatos">Número *</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="numeroFatos"
+                                       name="numeroFatos"
+                                       ng-model="vm.processo.localFatos.numero"
+                                       ng-disabled="profile.isAnalista() || vm.processo.statusId != 1"
+                                       ui-number-mask="0" maxlength="6"
+                                       required />
+                                <div class="col-md-12" ng-show="processoForm.numeroFatos.$invalid && processoForm.numeroFatos.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="complementoFatos">Complemento</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="complementoFatos"
+                                       name="complementoFatos"
+                                       ng-model="vm.processo.localFatos.complemento"
+                                       ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="bairroFatos">Bairro</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="bairroFatos"
+                                       name="bairroFatos"
+                                       ng-model="vm.processo.localFatos.bairro"
+                                       ng-disabled="vm.desabilitadaFatos || (profile.isAnalista() || vm.processo.statusId != 1)" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.ufFatos.$invalid && processoForm.ufFatos.$dirty}">
+                                <label class="control-label" for="ufFatos">UF *</label>
+                                <select class="form-control input-sm text-center fonte12pt"
+                                        id="ufFatos"
+                                        name="ufFatos"
+                                        ng-model="vm.processo.localFatos.estado"
+                                        ng-options="estado as estado.uf for estado in vm.estadosFatos"
+                                        ng-disabled="vm.desabilitadaFatos || (profile.isAnalista() || vm.processo.statusId != 1)"
+                                        ng-change="vm.carregarDropCidadeFatos()"
+                                        required>
+                                    <option value="">Selecione...</option>
+                                </select>
+                                <div class="col-md-12" ng-show="processoForm.ufFatos.$invalid && processoForm.ufFatos.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.cidadeFatos.$invalid && processoForm.cidadeFatos.$dirty}">
+                                <label class="control-label" for="cidadeFatos">Cidade *</label>
+                                <select class="form-control input-sm text-center fonte12pt"
+                                        id="cidadeFatos"
+                                        name="cidadeFatos"
+                                        ng-model="vm.processo.localFatos.cidade"
+                                        ng-options="cidade as cidade.nome for cidade in vm.cidadesFatos"
+                                        ng-disabled="vm.desabilitaCidadeFatos || (profile.isAnalista() || vm.processo.statusId != 1)">
+                                    <option value="">Selecione...</option>
+                                </select>
+                                <div class="col-md-12" ng-show="processoForm.cidadeFatos.$invalid && processoForm.cidadeFatos.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>--><!-- Local dos Fatos --><!-- Dados Segurado --><div class="form-group"><div class="col-md-12"><label class="control-label"></label><h4 class="text-primary">Dados do Segurado</h4></div></div><div class="form-group"><div class="col-md-6"><label class="control-label" for="segurado">Segurado *</label><input style="font-size: 12pt" class="form-control input-sm fonte12pt" type="tel" id="segurado" name="segurado" ng-minlenght="5" maxlength="150" ng-model="vm.processo.segurado.nome" ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" required><div class="col-md-12" ng-show="processoForm.segurado.$invalid && processoForm.segurado.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><!--<div class="form-group" ng-class="{'has-error' : processoForm.cep.$invalid && processoForm.cep.$dirty}">
+                            <div class="col-md-2">
+                                <label class="control-label" for="cep">CEP *</label>
+                                <input class="form-control input-sm text-right fonte12pt"
+                                       type="text"
+                                       id="cep"
+                                       name="cep"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.cep"
+                                       nminlength="9"
+                                       maxlength="9"
+                                       ui-br-cep-mask
+                                       ng-disabled="!vm.desabilitada ||(profile.isAnalista() || vm.processo.statusId != 1)"
+                                       required />
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary btn-sm btn-cep"
+                                        ng-click="vm.pesquisarEnderecoPorCep()"
+                                        ng-disabled="(processoForm.cep.$invalid || !processoForm.cep.$dirty) ||(profile.isAnalista() || vm.processo.statusId != 1)"
+                                        ng-show="vm.desabilitaNovaPesquisa">
+                                    <i class="fa fa-search"></i><b> Pesquisar CEP</b>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm btn-cep" ng-click="vm.novaPesquisa()" ng-hide="vm.desabilitaNovaPesquisa || (profile.isAnalista() || vm.processo.statusId != 1)">
+                                    <b>Nova Pesquisa</b>
+                                </button>
+                            </div>
+                            <div class="col-md-12" ng-show="processoForm.cep.$invalid && processoForm.cep.$dirty">
+                                <p class="text-danger" ng-show="!processoForm.cep.$error.required">
+                                    * CEP inválido
+                                </p>
+                                <p class="text-danger" ng-show="processoForm.cep.$error.required">
+                                    * Campo obrigatório
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="profile.isAnalista() || vm.processo.statusId != 1">
+                            <div class="col-md-12">
+                                <label class="control-label">Desabilita Preechimento Manual  </label>
+                                <input class="checkbox-inline" type="checkbox" ng-model="vm.desabilitada" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.endereco.$invalid && processoForm.endereco.$dirty}">
+                                <label class="control-label" for="endereco">Endereco *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text" id="endereco"
+                                       name="endereco"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.logradouro"
+                                       ng-disabled="vm.desabilitada ||(profile.isAnalista() || vm.processo.statusId != 1)"
+                                       required />
+                                <div class="col-md-12" ng-show="processoForm.endereco.$invalid && processoForm.endereco.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.numero.$invalid && processoForm.numero.$dirty}">
+                                <label class="control-label" for="numero">Número *</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="numero"
+                                       name="numero"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.numero"
+                                       ui-number-mask="0" maxlength="6"
+                                       ng-disabled="profile.isAnalista() || vm.processo.statusId != 1"
+                                       required />
+                                <div class="col-md-12" ng-show="processoForm.numero.$invalid && processoForm.numero.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="complemento">Complemento</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="complemento"
+                                       name="complemento"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.complemento"
+                                       ng-disabled="profile.isAnalista() || vm.processo.statusId != 1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="bairro">Bairro</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="bairro"
+                                       name="bairro"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.bairro"
+                                       ng-disabled="vm.desabilitada || (profile.isAnalista() || vm.processo.statusId != 1)" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.uf.$invalid && processoForm.uf.$dirty}">
+                                <label class="control-label" for="uf">UF *</label>
+                                <select class="form-control input-sm text-center fonte12pt"
+                                        id="uf"
+                                        name="uf"
+                                        ng-model="vm.processo.segurado.enderecoSegurado.estado"
+                                        ng-options="estado as estado.uf for estado in vm.estados"
+                                        ng-disabled="vm.desabilitada ||(profile.isAnalista() || vm.processo.statusId != 1)"
+                                        ng-change="vm.carregarDropCidade()"
+                                        required>
+                                    <option value="">Selecione...</option>
+                                </select>
+                                <div class="col-md-12" ng-show="processoForm.uf.$invalid && processoForm.uf.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.cidade.$invalid && processoForm.cidade.$dirty}">
+                                <label class="control-label" for="cidade">Cidade *</label>
+                                <select class="form-control input-sm text-center fonte12pt"
+                                        id="cidade"
+                                        name="cidade"
+                                        ng-model="vm.processo.segurado.enderecoSegurado.cidade"
+                                        ng-options="cidade as cidade.nome for cidade in vm.cidades"
+                                        ng-disabled="vm.desabilitaCidade || (profile.isAnalista() || vm.processo.statusId != 1)"
+                                        required>
+                                    <option value="">Selecione...</option>
+                                </select>
+                                <div class="col-md-12" ng-show="processoForm.cidade.$invalid && processoForm.cidade.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>--><!-- Dados processo.segurado --><div class="form-group" ng-hide="profile.isAnalista() || vm.processo.statusId != 1"><div class="col-md-12"><br><span class="btn btn-default btn-file"><i class="fa fa-folder-open"></i> Browser... <input id="arquivos" valid-file name="arquivos" type="file" ng-model="vm.arquivo" ng-change="vm.verfificarExtensao()"></span><div class="col-md-12"><b>{{vm.nomeArquivo}}</b></div><div class="col-md-12"><p ng-show="!vm.invalidExtension">* Arquivos zip ou rar</p><p class="text-danger" ng-show="vm.invalidExtension">* Os arquivos devem ser .pdf</p></div></div></div><div class="form-group" ng-show="vm.processo.sindicanteEnviado == undefined && vm.processo.statusId == 1 && vm.processo.sindicante.sindicanteTipoId == 1"><div class="col-md-4"><label class="control-label" for="sindicante">Enviada para o Sindicante:</label><select class="form-control input-sm fonte12pt" id="sindicanteExterno" name="sindicanteExterno" ng-model="vm.sindicanteExterno" ng-options="sindicanteEx as sindicanteEx.nome for sindicanteEx in vm.sindicanteExternoList"><option value="">Selecione...</option></select></div></div><div class="form-group" ng-show="vm.processo.sindicanteEnviado != null"><div class="col-md-4" ng-class="{'has-error' : processoForm.sindicante.$invalid && processoForm.sindicante.$dirty}"><label class="control-label" for="sindicante">Enviada para o Sindicante:</label><input class="form-control input-sm fonte12pt" readonly="readonly" ng-model="vm.processo.sindicanteEnviado"><div class="col-md-12" ng-show="processoForm.sindicante.$invalid && processoForm.sindicante.$dirty"><p class="text-danger">* Campo obrigatório</p></div></div></div><div class="form-group"><div class="col-md-4"><button ng-show="(!vm.processo.sindicanteExterno && vm.processo.statusId == 1 && vm.processo.sindicante.sindicanteTipoId == 1 && !vm.loading) && (profile.isAnalista() || profile.isAdmin())" type="button" class="btn btn-default btn-block btn-sm" ng-click="vm.enviar()"><b>Enviar Sindicante Externo</b></button></div></div></div><div class="col-md-12 form-group"><div class="col-md-10" ng-hide="vm.loading"><br><input type="submit" value="Salvar" class="btn btn-default" ng-show="!profile.isAnalista() && vm.processo.statusId == 1" ng-click="vm.salvar()" ng-disabled="processoForm.$invalid || processoForm.$pristine"> <a href="#/processo" class="btn btn-default">Voltar</a></div></div><div class="col-md-12 text-center" ng-show="vm.loading"><loading ng-model="vm.loading"></loading></div></div></div></div></form></section>

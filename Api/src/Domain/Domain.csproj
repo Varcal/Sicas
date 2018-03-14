@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A36D49E5-1B15-40AC-AFE6-687871FB4DDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administrativo\Contracts\Repositories\IBancoRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IEventoRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IProcessoHstoricoRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IProcessoRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Services\IEnderecoDomainService.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IEventoTipoRepository.cs" />
+    <Compile Include="Account\Contracts\Repositories\IPerfilRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\ISeguradoraRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IServicoSeguradoraRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\IServicoSindicanteRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\ISindicanteInternoRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Repositories\ISindicanteRepository.cs" />
+    <Compile Include="Account\Contracts\Repositories\IUsuarioRepository.cs" />
+    <Compile Include="Administrativo\Contracts\Services\IProcessoHistoricoDomainService.cs" />
+    <Compile Include="Administrativo\Contracts\Services\ISindicanteDomainService.cs" />
+    <Compile Include="Administrativo\Entities\Acionamento.cs" />
+    <Compile Include="Administrativo\Entities\Banco.cs" />
+    <Compile Include="Administrativo\Entities\DadosBancarios.cs" />
+    <Compile Include="Administrativo\Entities\EnderecoSegurado.cs" />
+    <Compile Include="Administrativo\Entities\EnderecoSindicante.cs" />
+    <Compile Include="Administrativo\Entities\EventoTipo.cs" />
+    <Compile Include="Administrativo\Entities\Evento.cs" />
+    <Compile Include="Administrativo\Entities\Honorario.cs" />
+    <Compile Include="Account\Entities\Perfil.cs" />
+    <Compile Include="Administrativo\Entities\LocalFatos.cs" />
+    <Compile Include="Administrativo\Entities\Processo.cs" />
+    <Compile Include="Administrativo\Entities\ProcessoHistorico.cs" />
+    <Compile Include="Administrativo\Entities\Segurado.cs" />
+    <Compile Include="Administrativo\Entities\Seguradora.cs" />
+    <Compile Include="Administrativo\Entities\ServicoSindicante.cs" />
+    <Compile Include="Administrativo\Entities\Sindicante.cs" />
+    <Compile Include="Administrativo\Entities\ServicoSeguradora.cs" />
+    <Compile Include="Administrativo\Entities\SindicanteInterno.cs" />
+    <Compile Include="Administrativo\Entities\SindicanteTipo.cs" />
+    <Compile Include="Administrativo\Entities\Status.cs" />
+    <Compile Include="Account\Entities\Usuario.cs" />
+    <Compile Include="Administrativo\Scopes\EventoScopes.cs" />
+    <Compile Include="Administrativo\Scopes\EventoTipoScope.cs" />
+    <Compile Include="Administrativo\Scopes\SeguradoraScopes.cs" />
+    <Compile Include="Administrativo\Scopes\ServicoSeguradoraScopes.cs" />
+    <Compile Include="Administrativo\Scopes\SindicanteInternoScopes.cs" />
+    <Compile Include="Administrativo\Scopes\SindicanteScopes.cs" />
+    <Compile Include="Account\Scopes\UsuarioScopes.cs" />
+    <Compile Include="Administrativo\Services\EnderecoDomainService.cs" />
+    <Compile Include="Administrativo\Services\ProcessoHistoricoDomainService.cs" />
+    <Compile Include="Administrativo\Services\SindicanteDomainService.cs" />
+    <Compile Include="Administrativo\Specs\ProcessoSpecs.cs" />
+    <Compile Include="Administrativo\ValueObjects\Diretorio.cs" />
+    <Compile Include="Core\Contracts\Repositories\IEnderecoRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\ICidadeRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\IEstadoRepository.cs" />
+    <Compile Include="Core\Entities\Enderecos\Cidade.cs" />
+    <Compile Include="Core\Entities\DadosCadastros\DadosCadastrais.cs" />
+    <Compile Include="Core\Entities\Enderecos\Endereco.cs" />
+    <Compile Include="Core\Entities\Enderecos\EnderecoTipo.cs" />
+    <Compile Include="Core\Entities\EntityBase.cs" />
+    <Compile Include="Core\Entities\EntityId.cs" />
+    <Compile Include="Core\Entities\Enderecos\Estado.cs" />
+    <Compile Include="Core\Entities\Enderecos\Pais.cs" />
+    <Compile Include="Core\Contracts\Repositories\Base\IRepositoryBase.cs" />
+    <Compile Include="Core\Entities\DadosCadastros\DadosPessoaFisica.cs" />
+    <Compile Include="Core\Entities\DadosCadastros\DadosPessoaJuridica.cs" />
+    <Compile Include="Core\Entities\DadosCadastros\PessoaTipo.cs" />
+    <Compile Include="Dtos\AlertaDto.cs" />
+    <Compile Include="Dtos\AlertaFinanceiroDto.cs" />
+    <Compile Include="Dtos\SindicanteHomeDto.cs" />
+    <Compile Include="Financeiro\Contracts\Repositories\IDespesaRepository.cs" />
+    <Compile Include="Financeiro\Contracts\Repositories\IDespesaSeguradoraRepository.cs" />
+    <Compile Include="Financeiro\Contracts\Repositories\ILancamentoRepository.cs" />
+    <Compile Include="Financeiro\Contracts\Repositories\IReciboRepository.cs" />
+    <Compile Include="Financeiro\Contracts\Repositories\IReciboSindicanteRepository.cs" />
+    <Compile Include="Financeiro\Contracts\Services\IEnderecoDespesaDomainService.cs" />
+    <Compile Include="Financeiro\Contracts\Services\ILancamentoDomainService.cs" />
+    <Compile Include="Financeiro\Entities\DespesasSeguradora\Despesa.cs" />
+    <Compile Include="Financeiro\Entities\DespesasSeguradora\DespesaAdicional.cs" />
+    <Compile Include="Financeiro\Entities\DespesasSeguradora\DespesaSeguradoraItem.cs" />
+    <Compile Include="Financeiro\Entities\DespesasSeguradora\DespesaSeguradora.cs" />
+    <Compile Include="Financeiro\Entities\DespesasSeguradora\EnderecoDespesa.cs" />
+    <Compile Include="Financeiro\Entities\RecibosSindicantes\Lancamento.cs" />
+    <Compile Include="Financeiro\Entities\RecibosSindicantes\LancamentoDespesa.cs" />
+    <Compile Include="Financeiro\Entities\RecibosSindicantes\Recibo.cs" />
+    <Compile Include="Financeiro\Entities\RecibosSindicantes\ReciboSindicante.cs" />
+    <Compile Include="Financeiro\Entities\RecibosSindicantes\ReciboSindicanteItem.cs" />
+    <Compile Include="Financeiro\Scopes\DespesaAdicionalScopes.cs" />
+    <Compile Include="Financeiro\Scopes\DespesaScopes.cs" />
+    <Compile Include="Financeiro\Services\EnderecoDespesaDomainService.cs" />
+    <Compile Include="Financeiro\Services\LancamentoDomainService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Account\Contracts\Services\" />
+    <Folder Include="Account\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj">
+      <Project>{0b380afa-f2c4-4701-9002-2d803db3cefc}</Project>
+      <Name>SharedKernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

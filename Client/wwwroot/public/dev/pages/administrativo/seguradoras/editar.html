@@ -1,0 +1,264 @@
+﻿<div class="panel panel-default painel-inicial">
+    <div class="panel-body">
+        <section class="col-md-12">
+            <form id="seguradoraForm" name="seguradoraForm" ng-submit="vm.salvar()" class="form-horizontal" novalidate>
+                <!-- Painel Seguradora -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Seguradoras - Dados cadastrais
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="container col-md-12">
+                            <div class="col-md-11">
+                                <div class="form-group" ng-class="{'has-error' : seguradoraForm.nome.$invalid && seguradoraForm.nome.$dirty}">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="nome">Nome *</label>
+                                        <input class="form-control input-sm fonte12pt"
+                                               type="text" id="nome"
+                                               name="nome"
+                                               ng-minlength="5"
+                                               ng-maxlength="150"
+                                               maxlength="150"
+                                               ng-model="vm.seguradora.nome"
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.nome.$invalid && seguradoraForm.nome.$dirty">
+                                            <p class="text-danger" ng-show="seguradoraForm.nome.$error.required">
+                                                * Campo obrigatório
+                                            </p>
+                                            <p class="text-danger" ng-show="!seguradoraForm.nome.$error.required">
+                                                * Nome deve ter entre 5 e 150 caractéres
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group" ng-class="{'has-error' : seguradoraForm.cnpj.$invalid && seguradoraForm.cnpj.$dirty}">
+                                    <div class="col-md-4">
+                                        <label class="control-label">CNPJ *</label>
+                                        <input class="form-control input-sm fonte12pt text-right"
+                                               type="text"
+                                               id="cnpj"
+                                               name="cnpj"
+                                               ng-model="vm.seguradora.cnpj"
+                                               ui-br-cnpj-mask
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.cnpj.$invalid && seguradoraForm.cnpj.$dirty">
+                                            <p class="text-danger" ng-show="!seguradoraForm.cnpj.$error.required">
+                                                * CNPJ inválido
+                                            </p>
+                                            <p class="text-danger" ng-show="seguradoraForm.cnpj.$error.required">
+                                                * Campo obrigatório
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error' : seguradoraForm.email.$invalid && seguradoraForm.email.$dirty}">
+                                    <div class="col-md-4">
+                                        <label class="control-label" for="email">E-mail *</label>
+                                        <input class="form-control input-sm fonte12pt"
+                                               type="text"
+                                               id="email"
+                                               name="email"
+                                               ng-minlength="5"
+                                               ng-maxlength="150"
+                                               ng-model="vm.seguradora.email"
+                                               ng-pattern="vm.emailPattern"
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.email.$invalid && seguradoraForm.email.$dirty">
+                                            <p class="text-danger" ng-show="seguradoraForm.email.$error.pattern">
+                                                * E-mail inválido
+                                            </p>
+                                            <p class="text-danger" ng-show="seguradoraForm.email.$error.required">
+                                                * Campo obrigatório
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3" ng-class="{'has-error' : seguradoraForm.telefone.$invalid && seguradoraForm.telefone.$dirty}">
+                                        <label class="control-label" for="telefone">Telefone *</label>
+                                        <input class="form-control input-sm fonte12pt text-right"
+                                               type="tel"
+                                               id="telefone"
+                                               maxlength="14"
+                                               name="telefone"
+                                               ng-minlength="14"
+                                               ng-maxlength="14"
+                                               ng-model="vm.seguradora.telefone"
+                                               ui-br-phone-number
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.telefone.$invalid && seguradoraForm.telefone.$dirty">
+                                            <p class="text-danger" ng-show="seguradoraForm.telefone.$error.required">
+                                                * Campo obrigatório
+                                            </p>
+                                            <p class="text-danger" ng-show="seguradoraForm.telefone.$error.minlength">
+                                                * Telefone inválido
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" ng-class="{'has-error' : seguradoraForm.contato.$invalid && seguradoraForm.contato.$dirty}">
+                                        <label class="control-label" for="contato">Contato *</label>
+                                        <input class="form-control input-sm fonte12pt"
+                                               type="text"
+                                               id="contato"
+                                               name="contato"
+                                               ng-minlength="3"
+                                               ng-maxlength="100"
+                                               ng-model="vm.seguradora.contato"
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.contato.$invalid && seguradoraForm.contato.$dirty">
+                                            <p class="text-danger">
+                                                * Campo obrigatório
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-2" ng-class="{'has-error' : seguradoraForm.valorPorKm.$invalid && seguradoraForm.valorPorKm.$dirty}">
+                                        <label class="control-label" for="valorPorKm">Valor Km *</label>
+                                        <input class="form-control input-sm fonte12pt text-right"
+                                               type="text"
+                                               id="valorPorKm"
+                                               name="valorPorKm"
+                                               ng-minlength="7"
+                                               ng-maxlength="9"
+                                               ng-model="vm.seguradora.valorPorKm"
+                                               ui-money-mask maxlength="9"
+                                               required />
+                                        <div class="col-md-12" ng-show="seguradoraForm.valorPorKm.$invalid && seguradoraForm.valorPorKm.$dirty">
+                                            <p class="text-danger">
+                                                * Campo obrigatório
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-9">
+                                        <label class="control-label" for="observacoes">Observações </label>
+                                        <textarea class="form-control"
+                                                  id="observacoes"
+                                                  name="observacoes"
+                                                  cols="100"
+                                                  rows="10"
+                                                  width="100%"
+                                                  ng-model="vm.seguradora.observacoes"></textarea>
+                                    </div>
+                                </div>
+                                <div>
+                                    <br />
+                                    <h4 class="text-primary">Configurações de Serviços</h4>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Tipo Serviço</label>
+                                        <select class="form-control input-sm fonte12pt"
+                                                ng-model="vm.evento.servicoSeguradora"
+                                                ng-change="vm.carregarEventoTipo()"
+                                                ng-options="ss as ss.nome for ss in vm.servicoSeguradoraList">
+                                            <option value="">Selecione...</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Tipo Evento</label>
+                                        <select class="form-control input-sm fonte12pt"
+                                                ng-disabled="vm.desabilitaDropEvento"
+                                                ng-model="vm.evento.eventoTipo"
+                                                ng-options="e as e.nome for e in vm.eventoTipoList">
+                                            <option value="">Selecione...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error' : false}">
+                                    <div class="col-md-2">
+                                        <label class="control-label">Franquia em Kms</label>
+                                        <input class="form-control input-sm fonte12pt text-right"
+                                               type="text"
+                                               id="franquiaKm"
+                                               name="franquiaKm"
+                                               ng-model="vm.evento.franquiaKm"
+                                               ui-number-mask="0" maxlength="5" />
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error' : false}">
+                                    <div class="col-md-2">
+                                        <label class="control-label">Honorário</label>
+                                        <input class="form-control input-sm fonte12pt text-right"
+                                               type="text"
+                                               id="honorario"
+                                               name="honorario"
+                                               ng-model="vm.evento.honorario"
+                                               ui-money-mask maxlength="13" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-default btnAddServico"
+                                        type="button"
+                                        ng-disabled="vm.evento.franquiaKm < 0 ||  vm.evento.franquiaKm == null || vm.evento.honorario == '' || vm.evento.eventoTipo == null"
+                                        ng-click="vm.addEvento(vm.evento)">
+                                    <i class="fa fa-plus"></i> Adicionar
+                                </button>
+                            </div>
+                            <div class="panel col-md-12" ng-show="vm.seguradora.eventos.length > 0">
+                                <br />
+                                <div class="col-md-6">
+                                    <h4 class="text-primary">Serviços adicionados</h4>
+                                </div>
+                                <!-- Tabela Seviços Adicionados -->
+                                <div class="col-md-12">
+                                    <table class="table table-striped table-hover table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo Serviço</th>
+                                                <th>Evento</th>
+                                                <th>Franquia Km</th>
+                                                <th>Valor</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="e in vm.seguradora.eventos">
+                                                <td>{{e.servicoSeguradora.nome}}</td>
+                                                <td>{{e.eventoTipo.nome}}</td>
+                                                <td>{{e.franquiaKm}}</td>
+                                                <td>{{e.honorario | currency}}</td>
+                                                <td><a ng-click="vm.removeEvento(e)"><i class="fa fa-remove text-danger"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-danger" ng-hide="vm.notificacoes < 1">
+                    <ul>
+                        <li ng-repeat="notificacao in vm.notificacoes">
+                            {{notificacao.value}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10" ng-hide="vm.loading">
+                        <button type="submit"
+                                class="btn btn-default"
+                                ng-hide="vm.seguradora.eventos <= 0"
+                                ng-disabled="seguradoraForm.$invalid">
+                            Salvar
+                        </button>
+                        <a href="#/seguradora" class="btn btn-default">Voltar</a>
+                    </div>
+                    <div class="col-md-12 text-center" ng-show="vm.loading">
+                        <loading ng-model="vm.loading"></loading>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+

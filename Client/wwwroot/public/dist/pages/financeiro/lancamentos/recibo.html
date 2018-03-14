@@ -1,0 +1,37 @@
+<div class="panel panel-default painel-inicial"><div class="panel-heading"><div class="panel-title"><h4>Recibo Sindicantes</h4></div></div><div class="panel-body"><div class="col-md-12"><div class="form-group col-md-3"><div class="col-md-12"><label class="control-label" for="dataInicio">Data Inicio</label></div><div class="col-md-12"><input class="form-control" type="date" id="dataInicio" name="dataInicio" ng-model="vm.dataInicio"></div></div><div class="form-group col-md-3"><div class="col-md-12"><label class="control-label" for="dataFim">Data Fim</label></div><div class="col-md-12"><input class="form-control" type="date" id="dataFim" name="dataFim" ng-model="vm.dataFim"></div></div><div class="form-group col-md-3"><div class="col-md-12"><label class="control-label"></label></div><div class="col-md-12"><button class="btn btn-default btn-recibo" ng-click="vm.pesquisar()" ng-disabled="(!vm.dataInicio || !vm.dataFim) || (vm.dataInicio>vm.dataFim)"><i class="fa fa-search"></i> Pesquisar</button></div></div></div><div class="col-md-12"><div class="form-group col-md-3" ng-show="vm.habilitaBtnGerarTodos"><div class="col-md-12"><button class="btn btn-primary btn-block" ng-click="vm.emitirTodos()">Gerar Todos</button></div></div></div></div><div class="panel-body"><section class="col-md-12"><div ng-hide="vm.recibos <= 0"><table id="tabela" class="table table-striped table-responsive table-hover table-condensed" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"><thead><tr><th class="text-center col-md-1">Numero</th><th class="text-center col-md-3">Sindicante</th><th class="text-center col-md-2">De</th><th class="text-center col-md-2">Até</th><th class="text-center col-md-2">Total</th><th class="text-center col-md-1"></th></tr></thead><tbody><tr ng-repeat="recibo in vm.recibos"><td class="text-center col-md-1">{{recibo.numero}}</td><td class="text-center col-md-3">{{recibo.sindicante}}</td><td class="text-center col-md-2">{{recibo.dataInicio | date:"dd/MM/yyyy"}}</td><td class="text-center col-md-2">{{recibo.dataFim | date:"dd/MM/yyyy"}}</td><td class="text-center col-md-1">{{recibo.total | number: 2}}</td><td class="text-center col-md-1"><a ng-hide="recibo.emitido" ng-click="vm.emitirRecibo(recibo.id)"><i class="fa fa-list" data-toggle="tooltip" title="Emitir"></i></a> <a ng-show="recibo.emitido"><i class="fa fa-download" data-toggle="tooltip" title="Emitido"></i></a></td></tr></tbody></table></div></section></div></div><!-- MODAL --><!-- MODAL --><script type="text/ng-template" id="reciboModal.html"><div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Lançamentos</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <table class="table table-hover table-responsive table-striped" ng-show="vm.lancamentos.length > 0">
+            <thead>
+                <tr>
+                    <th class="text-center">Tipo Lançamento</th>
+                    <th class="text-center">Descricao</th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lancamento in vm.lancamentos">
+                    <td class="text-center">
+                        {{lancamento.lancamentoTipo}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.descricao}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.valor| number: 2}}
+                    </td>
+                    <td class="text-center">
+                        {{lancamento.tipoFinanceiro}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning" ng-hide="vm.lancamentos.length > 0">
+            <h4>Nenhum lançamento para este recibo</h4>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="button" ng-click="vm.cancel()">Fechar</button>
+    </div></script>

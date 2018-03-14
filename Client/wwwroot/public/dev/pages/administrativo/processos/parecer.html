@@ -1,0 +1,424 @@
+﻿<section class="col-md-12">
+    <form id="processoForm" name="processoForm" ng-submit="vm.salvar()" class="form-horizontal" novalidate>
+        <div class="panel panel-default painel-inicial">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Parecer de Processo
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="container col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label class="control-label" for="id">Número</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="id"
+                                       name="id"
+                                       readonly
+                                       ng-model="vm.processo.id" />
+                            </div>
+                            <div class="col-md-3 col-md-offset-2">
+                                <label class="control-label" for="dataCadastro">Data Cadastro</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       id="dataCadastro"
+                                       name="dataCadastro"
+                                       ng-model="vm.processo.dataCadastro"
+                                       mask="39/19/9999"
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Seguradora</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       id="seguradora"
+                                       name="seguradora"
+                                       ng-model="vm.processo.seguradora"
+                                       readonly />
+
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <label class="control-label" for="cnpj">CNPJ</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="cnpj"
+                                       name="cnpj"
+                                       ui-br-cnpj-mask
+                                       ng-model="vm.processo.cnpj"
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="servicoSeguradora" class="control-label">Serviço Seguradora</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       id="servicoSeguradora"
+                                       name="servicoSeguradora"
+                                       ng-model="vm.processo.servicoSeguradora"
+                                       readonly />
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <label class="control-label" for="evento">Tipo Evento</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       id="evento"
+                                       name="evento"
+                                       ng-model="vm.processo.eventoTipo"
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="sindicante">Sindicante</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       id="sindicante"
+                                       name="sindicante"
+                                       ng-model="vm.processo.sindicante"
+                                       readonly />
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <label class="control-label" for="servicoSindicante">Serviço Sindicante</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       id="servicoSindicante"
+                                       name="servicoSindicante"
+                                       ng-model="vm.processo.servicoSindicante"
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="numeroSinistro">Nº Sinistro</label>
+                                <input class="form-control input-sm fonte12pt text-right" type="text"
+                                       id="numeroSinistro"
+                                       name="numeroSinistro"
+                                       ng-model="vm.processo.numeroSinistro"
+                                       ui-number-mask="0"
+                                       readonly />
+
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <label class="control-label" for="numeroReferencia">Nº Referência</label>
+                                <input class="form-control input-sm fonte12pt text-right" type="text"
+                                       id="numeroReferencia"
+                                       name="numeroReferencia"
+                                       ng-model="vm.processo.numeroReferencia"
+                                       ui-number-mask="0"
+                                       readonly />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="numeroSinistro">Placa </label>
+                                <input class="form-control input-sm fonte12pt text-right" type="text"
+                                       id="placa"
+                                       name="placa"
+                                       ng-model="vm.processo.placa"
+                                       ng-pattern="vm.placaPattern"
+                                       readonly />
+                                <div class="col-md-12" ng-show="processoForm.placa.$error.pattern && processoForm.placa.$dirty">
+                                    <p class="text-danger">
+                                        * Placa inválida
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.ufProcesso.$invalid && processoForm.ufProcesso.$dirty}">
+                                <label class="control-label" for="ufProcesso">UF *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                        id="ufProcesso"
+                                        name="ufProcesso"
+                                        ng-model="vm.processo.estado.uf"
+                                        readonly>                                   
+                                <div class="col-md-12" ng-show="processoForm.ufProcesso.$invalid && processoForm.ufProcesso.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.cidadeProcesso.$invalid && processoForm.cidadeProcesso.$dirty}">
+                                <label class="control-label" for="cidadeFatos">Cidade *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                       id="cidadeProcesso"
+                                       name="cidadeProcesso"
+                                       ng-model="vm.processo.cidade.nome"
+                                       readonly />                                 
+                                
+                                <div class="col-md-12" ng-show="processoForm.cidadeProcesso.$invalid && processoForm.cidadeProcesso.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="analista">Analista</label>
+                                <input class="form-control input-sm fonte12pt" type="text"
+                                       id="analista"
+                                       name="analista"
+                                       ng-model="vm.processo.analista"
+                                       readonly />
+                            </div>
+                        </div>
+                        <!-- Local dos Fatos -->
+                        <!--<div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label"></label>
+                                <h4 class="text-primary">Local dos Fatos</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.localFatos.$invalid && processoForm.localFatos.$dirty}">
+                                <label class="control-label" for="localFatos">Endereco *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="localFatos"
+                                       name="localFatos"
+                                       ng-model="vm.processo.localFatos.logradouro"
+                                       readonly />
+                            </div>
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.numeroFatos.$invalid && processoForm.numeroFatos.$dirty}">
+                                <label class="control-label" for="numeroFatos">Número *</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="numeroFatos"
+                                       name="numeroFatos"
+                                       ng-model="vm.processo.localFatos.numero"
+                                       ui-number-mask="0" maxlength="6"
+                                       readonly="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="complementoFatos">Complemento</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="complementoFatos"
+                                       name="complementoFatos"
+                                       ng-model="vm.processo.localFatos.complemento"
+                                       readonly />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label" for="cepFatos">CEP *</label>
+                                <input class="form-control input-sm text-right fonte12pt"
+                                       type="text"
+                                       id="cepFatos"
+                                       name="cepFatos"
+                                       ng-model="vm.processo.localFatos.cep"
+                                       nminlength="9"
+                                       maxlength="9"
+                                       ui-br-cep-mask
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="bairroFatos">Bairro</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="bairroFatos"
+                                       name="bairroFatos"
+                                       ng-model="vm.processo.localFatos.bairro"
+                                       readonly />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.ufFatos.$invalid && processoForm.ufFatos.$dirty}">
+                                <label class="control-label" for="ufFatos">UF *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                       id="ufFatos"
+                                       name="ufFatos"
+                                       ng-model="vm.processo.localFatos.estado.uf"
+                                       readonly />                                
+                            </div>
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.cidadeFatos.$invalid && processoForm.cidadeFatos.$dirty}">
+                                <label class="control-label" for="cidadeFatos">Cidade *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                       id="cidadeFatos"
+                                       name="cidadeFatos"
+                                       ng-model="vm.processo.localFatos.cidade.nome"
+                                       readonly />                                
+                            </div>
+                        </div>-->
+                        <!-- Local dos Fatos -->
+                        <!-- Dados Segurado -->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label"></label>
+                                <h4 class="text-primary">Dados do Segurado</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="segurado">Segurado *</label>
+                                <input style="font-size: 12pt" class="form-control input-sm fonte12pt" type="tel"
+                                       id="segurado"
+                                       name="segurado"
+                                       ng-model="vm.processo.segurado.nome"
+                                       readonly />
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.endereco.$invalid && processoForm.endereco.$dirty}">
+                                <label class="control-label" for="endereco">Endereco *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text" id="endereco"
+                                       name="endereco"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.logradouro"
+                                       readonly />
+                            </div>
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.numero.$invalid && processoForm.numero.$dirty}">
+                                <label class="control-label" for="numero">Número *</label>
+                                <input class="form-control input-sm fonte12pt text-right"
+                                       type="text"
+                                       id="numero"
+                                       name="numero"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.numero"
+                                       ui-number-mask="0" maxlength="6"
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="complemento">Complemento</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="complemento"
+                                       name="complemento"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.complemento"
+                                       readonly />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label" for="cep">CEP *</label>
+                                <input class="form-control input-sm text-right fonte12pt"
+                                       type="text"
+                                       id="cep"
+                                       name="cep"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.cep"
+                                       nminlength="9"
+                                       maxlength="9"
+                                       ui-br-cep-mask
+                                       readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="bairro">Bairro</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="bairro"
+                                       name="bairro"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.bairro"
+                                       readonly />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2" ng-class="{'has-error' : processoForm.uf.$invalid && processoForm.uf.$dirty}">
+                                <label class="control-label" for="uf">UF *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                       id="uf"
+                                       name="uf"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.estado.uf"
+                                       readonly />
+                            </div>
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.cidade.$invalid && processoForm.cidade.$dirty}">
+                                <label class="control-label" for="cidade">Cidade *</label>
+                                <input type="text" class="form-control input-sm text-center fonte12pt"
+                                       id="cidade"
+                                       name="cidade"
+                                       ng-model="vm.processo.segurado.enderecoSegurado.cidade.nome"
+                                       readonly/>
+                            </div>
+                        </div>-->
+                        <!-- Dados Segurado -->
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4" ng-class="{'has-error' : processoForm.situacaoId.$invalid && processoForm.situacaoId.$dirty}">
+                                <label for="situacaoId" class="control-label">Situação *</label>
+                                <select class="form-control"
+                                        ng-model="vm.processo.situacaoId"
+                                        id="situacaoId"
+                                        name="situacaoId"
+                                        ng-options="s.id as s.nome for s in vm.situacaoList"
+                                        required>
+                                    <option value="">Selecione...</option>
+                                </select>
+                                <div class="col-md-12" ng-show="processoForm.situacaoId.$invalid && processoForm.situacaoId.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9" ng-class="{'has-error' : processoForm.comentario.$invalid && processoForm.comentario.$dirty}">
+                                <label class="control-label" for="comentario">Considerções *</label>
+                                <textarea class="form-control"
+                                          id="comentario"
+                                          name="comentario"
+                                          cols="100"
+                                          rows="10"
+                                          width="100%"
+                                          ng-model="vm.processo.comentario"
+                                          required></textarea>
+                                <div class="col-md-12" ng-show="processoForm.comentario.$invalid && processoForm.comentario.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-folder-open"></i> Browser...
+                                    <input id="arquivos"
+                                           valid-file
+                                           name="arquivos"
+                                           type="file"
+                                           ng-model="vm.arquivo"
+                                           ng-change="vm.verfificarExtensao()"
+                                           ng-required="true" />
+                                </span>
+                                <div class="col-md-12">
+                                    <b>{{vm.nomeArquivo}}</b>
+                                </div>
+                                <div class="col-md-12">
+                                    <p ng-show="!vm.invalidExtension && !vm.arquivo">
+                                        * Arquivo obrigatório (.zip ou .rar)
+                                    </p>
+                                    <p class="text-danger" ng-show="vm.invalidExtension">
+                                        * Os arquivos devem ser .rar ou .zip
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-12">
+                        <br />
+                        <div class="col-md-10" ng-hide="vm.loading">
+                            <input type="submit" value="Salvar" class="btn btn-default" ng-disabled="processoForm.$invalid || vm.invalidExtension" />
+                            <a ng-href="#/processo" class="btn btn-default">Voltar</a>
+                        </div>
+                        <div class="col-md-12 text-center" ng-show="vm.loading">
+                            <loading ng-model="vm.loading"></loading>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

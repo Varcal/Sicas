@@ -1,0 +1,142 @@
+﻿<section class="col-md-12">
+    <form class="form-horizontal" name="usuarioForm" ng-submit="vm.salvar()" novalidate>
+        <!-- Painel Usuarios -->
+        <div class="panel panel-default painel-inicial">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Usuário - Alterar Senha
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="container col-md-12">
+                    <div class="col-md-11">
+                        <div class="form-group" ng-class="{'has-error' : usuarioForm.nome.$invalid && usuarioForm.nome.$dirty}">
+                            <div class="col-md-6">
+                                <label class="control-label" for="nome">Nome *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="nome"
+                                       name="nome"
+                                       ng-minlength="5"
+                                       ng-maxlength="150"
+                                       ng-model="vm.usuario.nome"
+                                       readonly />
+                                <div class="col-md-12" ng-show="usuarioForm.nome.$invalid && usuarioForm.nome.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : usuarioForm.login.$invalid && usuarioForm.login.$dirty}">
+                            <div class="col-md-6">
+                                <label class="control-label" for="login">E-mail *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="text"
+                                       id="login"
+                                       name="login"
+                                       ng-minlength="5"
+                                       ng-maxlength="150"
+                                       ng-model="vm.usuario.login"
+                                       ng-pattern="vm.emailPattern"
+                                       readonly=""/>
+                                <div class="col-md-12" ng-show="usuarioForm.login.$invalid && usuarioForm.login.$dirty">
+                                    <p class="text-danger" ng-show="usuarioForm.login.$error.pattern">
+                                        * E-mail inválido
+                                    </p>
+                                    <p class="text-danger" ng-show="usuarioForm.login.$error.required">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : usuarioForm.senhaAtual.$invalid && usuarioForm.senhaAtual.$dirty}">
+                            <div class="col-md-4">
+                                <label class="control-label" for="nome">Senha Atual *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="password"
+                                       id="senhaAtual"
+                                       name="senhaAtual"
+                                       ng-minlength="5"
+                                       ng-maxlength="20"
+                                       ng-blur="vm.verificarLoginSenha()"
+                                       ng-model="vm.usuario.senhaAtual"
+                                       required/>
+                                <div class="col-md-12" ng-show="(usuarioForm.senhaAtual.$invalid && usuarioForm.senhaAtual.$dirty) || !vm.senhaValida">
+                                    <p class="text-danger" ng-show="usuarioForm.senhaAtual.$error.required">
+                                        * Campo obrigatório
+                                    </p>
+                                    <p class="text-danger" ng-show="!usuarioForm.senhaAtual.$error.required">
+                                        * Senha atual não confere
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : usuarioForm.novaSenha.$invalid && usuarioForm.novaSenha.$dirty}">
+                            <div class="col-md-4">
+                                <label class="control-label" for="novaSenha">Nova Senha *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="password"
+                                       id="novaSenha"
+                                       name="novaSenha"
+                                       ng-minlength="5"
+                                       ng-maxlength="20"
+                                       ng-model="vm.usuario.novaSenha"
+                                       required/>
+                                <div class="col-md-12" ng-show="usuarioForm.novaSenha.$invalid && usuarioForm.novaSenha.$dirty">
+                                    <p class="text-danger">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : usuarioForm.confirmaSenha.$invalid && usuarioForm.confirmaSenha.$dirty}">
+                            <div class="col-md-4">
+                                <label class="control-label" for="confirmaSenha">Nova Senha *</label>
+                                <input class="form-control input-sm fonte12pt"
+                                       type="password"
+                                       id="confirmaSenha"
+                                       name="confirmaSenha"
+                                       ng-minlength="5"
+                                       ng-maxlength="20"
+                                       ng-model="vm.usuario.confirmaSenha"
+                                       required />
+                                <div class="col-md-12" ng-show="(usuarioForm.confirmaSenha.$invalid && usuarioForm.confirmaSenha.$dirty) || (usuarioForm.confirmaSenha.$dirty && (vm.usuario.novaSenha != vm.usuario.confirmaSenha))">
+                                    <p class="text-danger" ng-show="!usuarioForm.confirmaSenha.$error.required && (vm.usuario.novaSenha != vm.usuario.confirmaSenha)">
+                                        * Senhas não conferem
+                                    </p>
+                                    <p class="text-danger" ng-show="usuarioForm.confirmaSenha.$error.required">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-12 form-group">
+                        <br />
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="vm.salvar()"
+                                    ng-disable="usuarioForm.$invalid || vm.senhaValida || (vm.usuario.novaSenha != vm.usuario.confirmaSenha)">
+                                Salvar
+                            </button>
+                            <a href="#/" class="btn btn-default">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+</body>
+</html>

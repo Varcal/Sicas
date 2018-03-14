@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="/wwwroot/public/dev/assets/images/FC.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../bower_components/bootswatch/united/bootstrap.css" />
+    <link rel="stylesheet" href="../../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="../../bower_components/angular-datatables/dist/css/angular-datatables.min.css" />
+    <link rel="stylesheet" href="../../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <title>SICAS - Feitosa Consultoria</title>
+</head>
+<body ng-cloak ng-controller="menuController">
+    <!-- Menu -->
+    <div ng-include="'pages/shared/headbar.html'"></div>
+    <!-- Menu -->
+    <!-- Content -->
+    <div id="wrap">
+        <div id="main" class="container" ng-view></div>
+    </div>
+    <!-- Content -->
+    <!-- Footer -->
+    <div ng-include="'pages/shared/footer.html'" ng-show="user"></div>
+    <!-- Footer -->
+    <!-- Scripts Externos -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf8TUJQIEN-jJ_MNgqco8qtWhqHXVW6PY&signed_in=true"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../bower_components/moment/min/moment.min.js"></script>
+    <script src="../../bower_components/toastr/toastr.min.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="../../bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../../bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+    <script src="../../bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+    <script src="../../bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="assets/js/datatables-default.js"></script>
+    <script src="assets/js/string-mask.js"></script>
+    <script src="../../bower_components/br-masks/releases/br-masks.min.js"></script>
+    <script src="../../bower_components/angular-br-filters/release/angular-br-filters.min.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../bower_components/angular-ui-mask/dist/mask.min.js"></script>
+    <!-- Scripts Externos -->
+    <!-- Configurações -->
+    <script src="../../app/angular-module.js"></script>
+    <script src="../../app/routes.js"></script>
+    <script src="../../app/config.js"></script>
+    <!-- Configurações -->
+    <!-- Interceptors -->
+    <script src="../../app/interceptors/error-interceptor.js"></script>
+    <!-- Interceptors -->
+    <!-- Directives -->
+    <script src="../../app/directives/loading/loading-directive.js"></script>
+    <script src="../../app/directives/fileValidate-directive.js"></script>
+    <!-- Directives -->
+    <!-- Services -->
+    <script src="../../app/services/account/account-service.js"></script>
+    <script src="../../app/services/administrativo/seguradora-services.js"></script>
+    <script src="../../app/services/administrativo/usuario-services.js"></script>
+    <script src="../../app/services/administrativo/perfil-services.js"></script>
+    <script src="../../app/services/administrativo/eventoTipo-services.js"></script>
+    <script src="../../app/services/administrativo/servicoSeguradora-services.js"></script>
+    <script src="../../app/services/administrativo/endereco-services.js"></script>
+    <script src="../../app/services/administrativo/sindicante-services.js"></script>
+    <script src="../../app/services/administrativo/banco-services.js"></script>
+    <script src="../../app/services/administrativo/servicoSindicante-services.js"></script>
+    <script src="../../app/services/account/profile-service.js"></script>
+    <script src="../../app/services/administrativo/processo-services.js"></script>
+    <script src="../../app/services/financeiro/despesa-services.js"></script>
+    <script src="../../app/services/financeiro/lancamento-services.js"></script>
+    <script src="../../app/services/financeiro/reciboSindicanteService.js"></script>
+    <script src="../../app/services/home/home-services.js"></script>
+    <script src="../../app/services/administrativo/statusService.js"></script>
+    <!-- Services -->
+    <!-- Controllers -->
+    <script src="../../app/controllers/account/menu-controller.js"></script>
+    <script src="../../app/controllers/home/home-controller.js"></script>
+    <script src="../../app/controllers/home/home-modal-controller.js"></script>
+    <script src="../../app/controllers/account/login-controller.js"></script>
+    <script src="../../app/controllers/account/logout-controller.js"></script>
+    <script src="../../app/controllers/administrativo/seguradoras/seguradora-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/seguradoras/seguradora-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/seguradoras/seguradora-edit-controller.js"></script>
+    <script src="../../app/controllers/administrativo/seguradoras/seguradora-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/usuarios/usuario-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/usuarios/usuario-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/usuarios/usuario-edit-controller.js"></script>
+    <script src="../../app/controllers/administrativo/usuarios/usuario-senha-controller.js"></script>
+    <script src="../../app/controllers/administrativo/usuarios/usuario-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/sindicantes/sindicante-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/sindicantes/sindicante-edit-controller.js"></script>
+    <script src="../../app/controllers/administrativo/sindicantes/sindicante-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/sindicantes/sindicante-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-edit-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-historico-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-parecer-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/servicosSeguradoras/servicoSeguradora-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/servicosSeguradoras/servicoSeguradora-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/servicosSeguradoras/servicoSeguradora-edit-controller.js"></script>
+    <script src="../../app/controllers/administrativo/servicosSeguradoras/servicoSeguradora-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/processos/processo-finalizar-controller.js"></script>
+    <script src="../../app/controllers/administrativo/eventoTipo/eventoTipo-list-controller.js"></script>
+    <script src="../../app/controllers/administrativo/eventoTipo/eventoTIpo-modal-controller.js"></script>
+    <script src="../../app/controllers/administrativo/eventoTipo/eventoTipo-create-controller.js"></script>
+    <script src="../../app/controllers/administrativo/eventoTipo/eventoTipo-edit-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/despesa-list-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/despesa-create-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/despesa-edit-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/depesa-recibo-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/despesa-detail-controller.js"></script>
+    <script src="../../app/controllers/financeiro/despesas/despesaAdicional-modal-controller.js"></script>
+    <script src="../../app/controllers/financeiro/lancamentos/lancamento-controller.js"></script>
+    <script src="../../app/controllers/financeiro/lancamentos/lancamento-modal-controller.js"></script>
+    <script src="../../app/controllers/financeiro/lancamentos/pagamento-controller.js"></script>
+    <script src="../../app/controllers/financeiro/lancamentos/reciboSindicante-modal-controller.js"></script>
+    <script src="../../app/controllers/financeiro/lancamentos/reciboSindicante-recibo-controller.js"></script>
+    <!-- Controllers -->
+</body>
+</html>

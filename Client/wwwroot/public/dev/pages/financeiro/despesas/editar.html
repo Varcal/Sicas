@@ -1,0 +1,463 @@
+﻿<section class="col-md-12">
+    <form id="despesaForm" name="despesaForm" class="form-horizontal" novalidate>
+        <div class="panel panel-default painel-inicial">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Despesas de Processo
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="container col-md-12">
+                    <!-- Cabeçalho -->
+                    <div class="col-md-12">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-6">
+                                <label class="control-label">Seguradora: </label>&nbsp;{{vm.processo.seguradora}}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="col-md-3">
+                                <label class="control-label">Número Sinistro:</label> &nbsp;{{vm.processo.numeroSinistro}}
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="control-label">Número Referência:</label> &nbsp;{{vm.processo.numeroReferencia}}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12" ng-hide="vm.habilitarEdicao">
+                            <div class="col-md-3">
+                                <br />
+                                <a class="btn bg-primary" href="#/despesa/registrar/{{vm.processo.id}}"><i class="fa fa-plus"></i> Novo</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Cabeçalho -->
+                    <!-- Despesas -->
+                    <div class="col-md-12" ng-hide="vm.habilitarEdicao">
+                        <table class="table table-hover table-responsive table-striped" ng-show="vm.processo.despesas.length > 0">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1"></th>
+                                    <th class="col-md-1">Data</th>
+                                    <th class="col-md-2">Descricão</th>
+                                    <th class="col-md-3">Endereço</th>
+                                    <th class="col-md-1 text-center">Kms</th>
+                                    <th class="col-md-1 text-center">Valor Km</th>
+                                    <th class="col-md-1 text-center">Transporte Pedágio</th>
+                                    <th class="col-md-1 text-center">Hospedagem Refeição</th>
+                                    <th class="col-md-1">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="despesa in  vm.processo.despesas">
+                                    <td class="text-center">
+                                        <a ng-click="vm.editarDespesa(despesa)"><i class="fa fa-pencil"></i></a>&nbsp;
+                                        <a ng-click="vm.excluirDespesa(despesa)"><i class="fa fa-remove"></i></a>
+                                    </td>
+                                    <td>{{despesa.data | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{despesa.descricao}}</td>
+                                    <td>{{despesa.destino.logradouro}}, {{despesa.destino.numero}} - {{despesa.destino.bairro}} - {{despesa.destino.cidade.nome}}/{{despesa.destino.estado.uf}}</td>
+                                    <td class="text-center">{{despesa.kms | number: 2}}</td>
+                                    <td class="text-center">{{despesa.valorKm | number:2}}</td>
+                                    <td class="text-center">{{despesa.pedagioTransporte | number:2}}</td>
+                                    <td class="text-center">{{despesa.estadiaAlimentacao | number:2}}</td>
+                                    <td class="text-center">{{despesa.total | number: 2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Despesas -->
+                    <div ng-show="vm.habilitarEdicao">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="descricao">Descrição</label>
+                                    <input type="text"
+                                           id="descricao"
+                                           name="descricao"
+                                           class="form-control fonte12pt input-sm"
+                                           ng-model="vm.despesa.descricao"
+                                           required />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-md-3">
+                                    <label class="control-label" for="data">Data</label>
+                                    <input type="date"
+                                           id="data"
+                                           name="data"
+                                           class="form-control fonte12pt input-sm"
+                                           ng-model="vm.despesa.data"
+                                           required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Origem -->
+                        <div class="col-md-12">
+                            <label class="text-primary"><br />Origem: </label>
+                            <div class="form-group col-md-12" ng-class="{'has-error' : despesaForm.origemCep.$invalid && despesaForm.origemCep.$dirty}">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="origem-cep">CEP *</label>
+                                    <input class="form-control input-sm text-right fonte12pt"
+                                           type="text"
+                                           id="origemCep"
+                                           name="origemCep"
+                                           ng-model="vm.despesa.origem.cep"
+                                           nminlength="9"
+                                           maxlength="9"
+                                           ui-br-cep-mask
+                                           ng-disabled="!vm.desabilitadaOrigem"
+                                           required />
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary btn-sm btn-cepDespesa"
+                                            ng-click="vm.pesquisarOrigemPorCep()"
+                                            ng-disabled="despesaForm.origemCep.$invalid || !despesaForm.origemCep.$dirty"
+                                            ng-show="vm.desabilitaNovaPesquisaOrigem">
+                                        <i class="fa fa-search"></i><b> Pesquisar CEP</b>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-cepDespesa" ng-click="vm.novaPesquisaOrigem()" ng-hide="vm.desabilitaNovaPesquisaOrigem">
+                                        <b>Nova Pesquisa</b>
+                                    </button>
+                                </div>
+                                <div class="col-md-12" ng-show="despesaForm.origemCep.$invalid && despesaForm.origemCep.$dirty">
+                                    <p class="text-danger" ng-show="!despesaForm.origemCep.$error.required">
+                                        * CEP inválido
+                                    </p>
+                                    <p class="text-danger" ng-show="despesaForm.origemCep.$error.required">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-12">
+                                    <label class="control-label">Desabilita Preechimento Manual  </label>
+                                    <input class="checkbox-inline" type="checkbox" ng-model="vm.desabilitadaOrigem" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4" ng-class="{'has-error' : despesaForm.origemLogradouro.$invalid && despesaForm.origemLogradouro.$dirty}">
+                                    <label class="control-label" for="origemLogradouro">Endereco *</label>
+                                    <input class="form-control input-sm fonte12pt"
+                                           type="text" id="origemLogradouro"
+                                           name="origemLogradouro"
+                                           ng-model="vm.despesa.origem.logradouro"
+                                           ng-disabled="vm.desabilitadaOrigem"
+                                           required />
+                                    <div class="col-md-12" ng-show="despesaForm.origemLogradouro.$invalid && despesaForm.origemLogradouro.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" ng-class="{'has-error' : despesaForm.origemNumero.$invalid && despesaForm.origemNumero.$dirty}">
+                                    <label class="control-label" for="origemNumero">Número *</label>
+                                    <input class="form-control input-sm fonte12pt text-right"
+                                           type="text"
+                                           id="origemNumero"
+                                           name="origemNumero"
+                                           ng-model="vm.despesa.origem.numero"
+                                           ui-number-mask="0" maxlength="6"
+                                           required />
+                                    <div class="col-md-12" ng-show="despesaForm.origemNumero.$invalid && despesaForm.origemNumero.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="origemBairro">Bairro</label>
+                                    <input class="form-control input-sm fonte12pt"
+                                           type="text"
+                                           id="origemBairro"
+                                           name="origemBairro"
+                                           ng-model="vm.despesa.origem.bairro"
+                                           ng-disabled="vm.desabilitadaOrigem" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-md-2" ng-class="{'has-error' : despesaForm.origemUf.$invalid && despesaForm.origemUf.$dirty}">
+                                    <label class="control-label" for="origemUf">UF *</label>
+                                    <select class="form-control input-sm text-center fonte12pt"
+                                            id="origemUf"
+                                            name="origemUf"
+                                            ng-model="vm.despesa.origem.estado"
+                                            ng-options="estadoOrigem as estadoOrigem.uf for estadoOrigem in vm.estadosOrigem"
+                                            ng-disabled="vm.desabilitadaOrigem"
+                                            ng-change="vm.carregarDropCidade()"
+                                            required>
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                    <div class="col-md-12" ng-show="despesaForm.origemUf.$invalid && despesaForm.origemUf.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-class="{'has-error' : despesaForm.origemCidade.$invalid && despesaForm.origemCidade.$dirty}">
+                                    <label class="control-label" for="origemCidade">Cidade *</label>
+                                    <select class="form-control input-sm text-center fonte12pt"
+                                            id="origemCidade"
+                                            name="origemCidade"
+                                            ng-model="vm.despesa.origem.cidade"
+                                            ng-options="cidadeOrigem as cidadeOrigem.nome for cidadeOrigem in vm.cidadesOrigem"
+                                            ng-disabled="vm.desabilitadaOrigem"
+                                            required>
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                    <div class="col-md-12" ng-show="despesaForm.origemCidade.$invalid && despesaForm.origemCidade.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Origem -->
+                        <!-- Destino -->
+                        <div class="col-md-12">
+                            <label class="text-primary"><br /> Destino: </label>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="destinoCep">CEP *</label>
+                                    <input class="form-control input-sm text-right fonte12pt"
+                                           type="text"
+                                           id="destinoCep"
+                                           name="destinoCep"
+                                           ng-model="vm.despesa.destino.cep"
+                                           nminlength="9"
+                                           maxlength="9"
+                                           ui-br-cep-mask
+                                           ng-disabled="!vm.desabilitadaDestino"
+                                           required />
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary btn-sm btn-cepDespesa"
+                                            ng-click="vm.pesquisarDestinoPorCep()"
+                                            ng-disabled="despesaForm.destinoCep.$invalid || !despesaForm.destinoCep.$dirty"
+                                            ng-show="vm.desabilitaNovaPesquisaDestino">
+                                        <i class="fa fa-search"></i><b> Pesquisar CEP</b>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-cepDespesa" ng-click="vm.novaPesquisaDestino()" ng-hide="vm.desabilitaNovaPesquisaDestino">
+                                        <b>Nova Pesquisa</b>
+                                    </button>
+                                </div>
+                                <div class="col-md-12" ng-show="despesaForm.destinoCep.$invalid && despesaForm.destinoCep.$dirty">
+                                    <p class="text-danger" ng-show="!despesaForm.destinoCep.$error.required">
+                                        * CEP inválido
+                                    </p>
+                                    <p class="text-danger" ng-show="despesaForm.destinoCep.$error.required">
+                                        * Campo obrigatório
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-12">
+                                    <label class="control-label">Desabilita Preechimento Manual  </label>
+                                    <input class="checkbox-inline" type="checkbox" ng-model="vm.desabilitadaDestino" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4" ng-class="{'has-error' : despesaForm.destinoLogradouro.$invalid && despesaForm.destinoLogradouro.$dirty}">
+                                    <label class="control-label" for="destinoLogradouro">Endereco *</label>
+                                    <input class="form-control input-sm fonte12pt"
+                                           type="text"
+                                           id="destinoLogradouro"
+                                           name="destinoLogradouro"
+                                           ng-model="vm.despesa.destino.logradouro"
+                                           ng-disabled="vm.desabilitadaDestino"
+                                           required />
+                                    <div class="col-md-12" ng-show="despesaForm.destinoLogradouro.$invalid && despesaForm.destinoLogradouro.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" ng-class="{'has-error' : despesaForm.destinoNumero.$invalid && despesaForm.destinoNumero.$dirty}">
+                                    <label class="control-label" for="destinoNumero">Número *</label>
+                                    <input class="form-control input-sm fonte12pt text-right"
+                                           type="text"
+                                           id="destinoNumero"
+                                           name="destinoNumero"
+                                           ng-model="vm.despesa.destino.numero"
+                                           ui-number-mask="0" maxlength="6"
+                                           required />
+                                    <div class="col-md-12" ng-show="despesaForm.destinoNumero.$invalid && despesaForm.destinoNumero.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="destinoBairro">Bairro</label>
+                                    <input class="form-control input-sm fonte12pt"
+                                           type="text"
+                                           id="destinoBairro"
+                                           name="destinoBairro"
+                                           ng-model="vm.despesa.destino.bairro"
+                                           ng-disabled="vm.desabilitadaDestino" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-2" ng-class="{'has-error' : despesaForm.destinoUf.$invalid && despesaForm.destinoUf.$dirty}">
+                                    <label class="control-label" for="destinoUf">UF *</label>
+                                    <select class="form-control input-sm text-center fonte12pt"
+                                            id="destinoUf"
+                                            name="destinoUf"
+                                            ng-model="vm.despesa.destino.estado"
+                                            ng-options="estadoDestino as estadoDestino.uf for estadoDestino in vm.estadosDestino"
+                                            ng-disabled="vm.desabilitadaDestino"
+                                            ng-change="vm.carregarDropCidade()"
+                                            required>
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                    <div class="col-md-12" ng-show="despesaForm.destinoUf.$invalid && despesaForm.destinoUf.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-class="{'has-error' : despesaForm.destinoCidade.$invalid && despesaForm.destinoCidade.$dirty}">
+                                    <label class="control-label" for="destinoCidade">Cidade *</label>
+                                    <select class="form-control input-sm text-center fonte12pt"
+                                            id="destinoCidade"
+                                            name="destinoCidade"
+                                            ng-model="vm.despesa.destino.cidade"
+                                            ng-options="cidadeDestino as cidadeDestino.nome for cidadeDestino in vm.cidadesDestino"
+                                            ng-disabled="vm.desabilitadaDestino"
+                                            required>
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                    <div class="col-md-12" ng-show="despesaForm.destinoCidade.$invalid && despesaForm.destinoCidade.$dirty">
+                                        <p class="text-danger">
+                                            * Campo obrigatório
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Destino -->
+                        <div class="col-md-12">
+                            <div class="form-group col-md-12">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="kms">Kms</label>
+                                    <input type="text" class="form-control input-sm fonte12pt text-right"
+                                           id="kms"
+                                           name="kms"
+                                           ng-model="vm.despesa.kms"
+                                           readonly />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label" for="valorKm">Valor Km: </label>
+                                    <input type="text" class="form-control input-sm fonte12pt text-right"
+                                           id="valorKm"
+                                           name="valorKm"
+                                           ng-model="vm.processo.valorKm"
+                                           ui-money-mask maxlength="9"
+                                           readonly
+                                           required />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label" for="despesaKm">Total</label>
+                                    <input type="text" class="form-control input-sm fonte12pt text-right"
+                                           id="despesaKm"
+                                           name="despesaKm"
+                                           ng-model="vm.despesa.valorKm"
+                                           ui-money-mask maxlength="9"
+                                           readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-12">
+                                        <br />
+                                        <button type="button" class="btn btn-primary" ng-click="vm.calcularDistancia()"><b>Recalcular</b></button>&nbsp;
+                                        <a class="btn btn-primary"
+                                           ng-show="vm.despesa.kms > 0 && vm.despesa.valorKm > 0"
+                                           ng-click="vm.habilitarAdicionais()">
+                                            <b>Incluir Despesas Adicionais</b>
+                                        </a>&nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" ng-show="vm.habilitadoAdicionais">
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <label class="control-label" for="tipoDespesa">Tipo Despesa</label>
+                                    <select class="form-control input-sm fonte12pt"
+                                            id="tipoDespesa"
+                                            name="tipoDespesa"
+                                            ng-model="vm.despesaAdicional.despesaTipo"
+                                            ng-change="vm.selecionarTipoDespesa()"
+                                            ng-options="td as td.descricao for td in vm.tipoDespesaList">
+                                        <option value="">Selecione</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label" for="valor">Valor *</label>
+                                    <input class="form-control input-sm fonte12pt text-right"
+                                           id="valor"
+                                           name="valor"
+                                           ng-model="vm.despesaAdicional.valor"
+                                           ui-money-mask
+                                           maxlength="9" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary btn-sm btn-cepDespesa" ng-show="vm.despesaAdicional.despesaTipo && vm.despesaAdicional.valor>0" ng-click="vm.incluirDespesaAdicional()">
+                                        <b>Incluir</b>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-show="vm.despesa.despesasAdicionais.length > 0">
+                            <br />
+                            <label class="text-primary">Despesas Adicionais</label>
+                            <table class="table table-condensed table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Tipo Despesa</th>
+                                        <th>Valor (R$)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="da in vm.despesa.despesasAdicionais">
+                                        <td></td>
+                                        <td>{{da.descricao}}</td>
+                                        <td class="col-md-2 text-center">{{da.valor | number: 2}}</td>
+                                        <td class="col-md-2 text-center"><a ng-click="vm.excluirDespesaAdicional(da)"><i class="fa fa-remove"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                <div class="col-md-12" ng-hide="vm.loading">
+                    <br />
+                    <a ng-hide="vm.habilitarEdicao" class="btn btn-primary" href="#/despesa">Voltar</a>
+                    <button ng-show="vm.habilitarEdicao" class="btn btn-primary" ng-show="vm.processo.despesas.length > 0" ng-click="vm.salvar()">Salvar</button>
+                    <button ng-show="vm.habilitarEdicao" ng-click="vm.encerrarEdicao()" class="btn btn-primary">Voltar</button>
+                </div>
+                    <div class="col-md-12 text-center" ng-show="vm.loading">
+                        <loading ng-model="vm.loading"></loading>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+
+

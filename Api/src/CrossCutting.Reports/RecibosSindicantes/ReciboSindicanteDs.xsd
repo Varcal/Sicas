@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReciboSindicante" targetNamespace="http://tempuri.org/ReciboSindicante.xsd" xmlns:mstns="http://tempuri.org/ReciboSindicante.xsd" xmlns="http://tempuri.org/ReciboSindicante.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReciboSindicante" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReciboSindicante" msprop:Generator_UserDSName="ReciboSindicante">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReciboSindicanteDt" msprop:Generator_TableClassName="ReciboSindicanteDtDataTable" msprop:Generator_TableVarName="tableReciboSindicanteDt" msprop:Generator_TablePropName="ReciboSindicanteDt" msprop:Generator_RowDeletingName="ReciboSindicanteDtRowDeleting" msprop:Generator_RowChangingName="ReciboSindicanteDtRowChanging" msprop:Generator_RowEvHandlerName="ReciboSindicanteDtRowChangeEventHandler" msprop:Generator_RowDeletedName="ReciboSindicanteDtRowDeleted" msprop:Generator_UserTableName="ReciboSindicanteDt" msprop:Generator_RowChangedName="ReciboSindicanteDtRowChanged" msprop:Generator_RowEvArgName="ReciboSindicanteDtRowChangeEvent" msprop:Generator_RowClassName="ReciboSindicanteDtRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Segurado" msprop:Generator_ColumnVarNameInTable="columnSegurado" msprop:Generator_ColumnPropNameInRow="Segurado" msprop:Generator_ColumnPropNameInTable="SeguradoColumn" msprop:Generator_UserColumnName="Segurado" type="xs:string" minOccurs="0" />
+              <xs:element name="Sinistro" msprop:Generator_ColumnVarNameInTable="columnSinistro" msprop:Generator_ColumnPropNameInRow="Sinistro" msprop:Generator_ColumnPropNameInTable="SinistroColumn" msprop:Generator_UserColumnName="Sinistro" type="xs:string" minOccurs="0" />
+              <xs:element name="Cia" msprop:Generator_ColumnVarNameInTable="columnCia" msprop:Generator_ColumnPropNameInRow="Cia" msprop:Generator_ColumnPropNameInTable="CiaColumn" msprop:Generator_UserColumnName="Cia" type="xs:string" minOccurs="0" />
+              <xs:element name="Despesa" msprop:Generator_ColumnVarNameInTable="columnDespesa" msprop:Generator_ColumnPropNameInRow="Despesa" msprop:Generator_ColumnPropNameInTable="DespesaColumn" msprop:Generator_UserColumnName="Despesa" type="xs:string" minOccurs="0" />
+              <xs:element name="Honorario" msprop:Generator_ColumnVarNameInTable="columnHonorario" msprop:Generator_ColumnPropNameInRow="Honorario" msprop:Generator_ColumnPropNameInTable="HonorarioColumn" msprop:Generator_UserColumnName="Honorario" type="xs:string" minOccurs="0" />
+              <xs:element name="DataTerminoTrabalho" msprop:Generator_ColumnVarNameInTable="columnDataTerminoTrabalho" msprop:Generator_ColumnPropNameInRow="DataTerminoTrabalho" msprop:Generator_ColumnPropNameInTable="DataTerminoTrabalhoColumn" msprop:Generator_UserColumnName="DataTerminoTrabalho" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

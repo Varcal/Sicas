@@ -1,0 +1,12 @@
+<div class="panel panel-default painel-inicial" ng-cloak><div class="panel-heading"><h4>Sindicantes</h4></div><div class="panel-body"><section class="col-md-12"><div><a class="btn btn-primary" href="#/sindicante/registrar">Novo</a></div><br><div ng-hide="vm.sindicantes.length <= 0"><table class="table table-striped table-responsive table-hover ng-cloak" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"><thead><tr><th class="col-md-1"></th><th><strong>Nome do Sindicante</strong></th><th><strong>Tipo</strong></th><th><strong>E-mail</strong></th><th><strong>Celular</strong></th></tr></thead><tbody><tr ng-repeat="sindicante in vm.sindicantes"><td class="text-center col-md-1"><a href="#/sindicante/editar/{{sindicante.id}}"><i class="fa fa-pencil"></i></a><!--<a href="#/sindicante/detalhes/{{sindicante.id}}"><i class="fa fa-eye"></i></a>&nbsp;--> <a ng-click="vm.openModal(sindicante)" ng-show="profile.isAdmin()"><i class="fa fa-remove text-danger"></i></a></td><td>{{sindicante.nome}}</td><td>{{sindicante.sindicanteTipo}}</td><td>{{sindicante.email}}</td><td>{{sindicante.celular | brPhoneNumber}}</td></tr></tbody></table></div><div ng-show="vm.sindicantes.length <= 0"><br><div class="alert alert-warning text-center"><h4>Nenhum sindicante cadastrado</h4></div></div></section></div></div><!-- MODAL --><script type="text/ng-template" id="sindicanteModal.html"><div class="modal-header">
+        <h3 class="modal-title" id="modal-title">ATENÇÃO</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <h4>
+            Tem certeza que deseja excluir o sindicante?
+        </h4>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="vm.ok()">Confirmar</button>
+        <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+    </div></script>
